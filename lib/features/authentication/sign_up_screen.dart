@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:tiktokclone/features/authentication/email_screen.dart';
 import 'package:tiktokclone/features/authentication/login_screen.dart';
 import 'package:tiktokclone/constants/gaps.dart';
 import 'package:tiktokclone/constants/sizes.dart';
@@ -7,7 +9,9 @@ import 'package:tiktokclone/features/authentication/widgets/auth_button.dart';
 class SignUpScreen extends StatelessWidget {
   const SignUpScreen({super.key});
 
-  void onLoginTap(BuildContext context) {
+//  private 한 method의 이름 맨 앞에는 '_'를 붙여주자.
+// state lifecycle 관련된 method 앞에는 '_' 안붙여준다. ex.Build
+  void _onLoginTap(BuildContext context) {
     Navigator.of(context).push(
       MaterialPageRoute(
         builder: (context) => const LoginScreen(),
@@ -15,18 +19,26 @@ class SignUpScreen extends StatelessWidget {
     );
   }
 
+  void _onEmailTap(BuildContext context) {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => const EmailScreen(),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: const SafeArea(
+      body: SafeArea(
         child: Padding(
-          padding: EdgeInsets.symmetric(
+          padding: const EdgeInsets.symmetric(
             horizontal: Sizes.size40,
           ),
           child: Column(
             children: [
               Gaps.v80,
-              Text(
+              const Text(
                 'Sign up for TikTok',
                 style: TextStyle(
                   fontSize: Sizes.size24,
@@ -34,7 +46,7 @@ class SignUpScreen extends StatelessWidget {
                 ),
               ),
               Gaps.v20,
-              Text(
+              const Text(
                 'Create a profile, follow other accounts, make your own videos, and more.',
                 style: TextStyle(
                   fontSize: Sizes.size16,
@@ -43,13 +55,29 @@ class SignUpScreen extends StatelessWidget {
                 textAlign: TextAlign.center,
               ),
               Gaps.v40,
-              AuthButton(text: 'Use phone or email'),
+              AuthButton(
+                icon: const FaIcon(FontAwesomeIcons.user),
+                text: 'Use email or password',
+                onTapFunction: _onEmailTap,
+              ),
               Gaps.v12,
-              AuthButton(text: 'Continue with Facebook'),
+              AuthButton(
+                icon: const FaIcon(FontAwesomeIcons.facebook),
+                text: 'Continue with Facebook',
+                onTapFunction: (context) {},
+              ),
               Gaps.v12,
-              AuthButton(text: 'Continue with Apple'),
+              AuthButton(
+                icon: const FaIcon(FontAwesomeIcons.apple),
+                text: 'Continue with Apple',
+                onTapFunction: (context) {},
+              ),
               Gaps.v12,
-              AuthButton(text: 'Continue with Google'),
+              AuthButton(
+                icon: const FaIcon(FontAwesomeIcons.google),
+                text: 'Continue with Google',
+                onTapFunction: (context) {},
+              ),
               Gaps.v12,
             ],
           ),
@@ -57,7 +85,7 @@ class SignUpScreen extends StatelessWidget {
       ),
       bottomNavigationBar: BottomAppBar(
         elevation: 1,
-        color: Colors.grey.shade100,
+        color: Colors.grey.shade50,
         child: Padding(
           padding: const EdgeInsets.symmetric(
             vertical: Sizes.size10,
@@ -73,7 +101,7 @@ class SignUpScreen extends StatelessWidget {
               ),
               Gaps.h5,
               GestureDetector(
-                onTap: () => onLoginTap(context),
+                onTap: () => _onLoginTap(context),
                 child: Text(
                   'Log in',
                   style: TextStyle(
