@@ -1,44 +1,79 @@
 import 'package:flutter/material.dart';
 import 'package:tiktokclone/constants/gaps.dart';
 import 'package:tiktokclone/constants/sizes.dart';
+import 'package:tiktokclone/features/authentication/widgets/form_button.dart';
 
-class EmailScreen extends StatelessWidget {
+class EmailScreen extends StatefulWidget {
   const EmailScreen({super.key});
+
+  @override
+  State<EmailScreen> createState() => _EmailScreenState();
+}
+
+class _EmailScreenState extends State<EmailScreen> {
+  final TextEditingController _emailController = TextEditingController();
+
+  String _email = "";
+
+  @override
+  void initState() {
+    super.initState();
+    _emailController.addListener(
+      () {
+        setState(() {
+          _email = _emailController.text;
+        });
+      },
+    );
+  }
+
+  @override
+  void dispose() {
+    _emailController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        // backgroundColor: Colors.white,
         appBar: AppBar(
-          // backgroundColor: Colors.white,
-          // foregroundColor: Colors.amber,
           title: const Text(
             "Sign up",
           ),
         ),
-        body: const Padding(
-          padding: EdgeInsets.symmetric(horizontal: Sizes.size36),
+        body: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: Sizes.size36),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Gaps.v28,
-              Text(
-                'Create username',
+              const Text(
+                'What is your email?',
                 style: TextStyle(
                   fontSize: Sizes.size20 + Sizes.size2,
                   fontWeight: FontWeight.w600,
                 ),
               ),
-              Gaps.v10,
-              Text(
-                'You can always change this later.',
-                style: TextStyle(
-                  fontSize: Sizes.size16,
-                  color: Colors.black54,
-                  fontWeight: FontWeight.w300,
+              Gaps.v16,
+              TextField(
+                controller: _emailController,
+                cursorColor: Theme.of(context).colorScheme.onPrimary,
+                decoration: InputDecoration(
+                  hintText: "Email",
+                  enabledBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(
+                      color: Colors.grey.shade400,
+                    ),
+                  ),
+                  focusedBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(
+                      color: Colors.grey.shade400,
+                    ),
+                  ),
                 ),
               ),
-              Gaps.h20,
+              Gaps.v24,
+              FormButton(disabled: _email.isEmpty),
             ],
           ),
         ));
