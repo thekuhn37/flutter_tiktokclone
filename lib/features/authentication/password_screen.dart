@@ -107,7 +107,9 @@ class _PasswordScreenState extends State<PasswordScreen> {
             ),
           ),
           body: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: Sizes.size36),
+            padding: const EdgeInsets.symmetric(
+              horizontal: Sizes.size36,
+            ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -216,6 +218,7 @@ class _PasswordScreenState extends State<PasswordScreen> {
                   // onTap: _onSubmit,
                   onTap: _onSubmit,
                   child: FormButton(
+                    text: 'Next',
                     disabled: !_isPasswordValid(),
                     // _isPasswordValid가 true가 아닐 때 disabled 되어야.
 

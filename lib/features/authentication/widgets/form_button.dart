@@ -3,11 +3,13 @@ import 'package:tiktokclone/constants/sizes.dart';
 
 class FormButton extends StatelessWidget {
   final bool disabled;
+  final String text;
   // disabled라는 boolean 변수만 받으면 된다.
 
   const FormButton({
     super.key,
     required this.disabled,
+    required this.text,
     // 자동으로 code action 하였을 시 : required String username,
   });
   // 자동으로 code action 하였을 시 : _username = username;
@@ -40,8 +42,8 @@ class FormButton extends StatelessWidget {
             color: disabled ? Colors.grey.shade500 : Colors.white,
             fontWeight: FontWeight.w600,
           ),
-          child: const Text(
-            'Next',
+          child: Text(
+            text,
             textAlign: TextAlign.center,
           ),
         ),

@@ -111,6 +111,7 @@ Statefulwidget의 State 위젯 내에서는 항상 context가 available 하기 �
             GestureDetector(
               onTap: _onNextTap,
               child: FormButton(
+                text: 'Next',
                 disabled: _username.isEmpty,
               ),
             ),
