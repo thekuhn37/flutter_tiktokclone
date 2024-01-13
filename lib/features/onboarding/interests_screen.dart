@@ -1,6 +1,8 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:tiktokclone/constants/gaps.dart';
 import 'package:tiktokclone/constants/sizes.dart';
+import 'package:tiktokclone/features/onboarding/widgets/interest_button.dart';
 
 const interests = [
   "Daily Life",
@@ -43,8 +45,51 @@ const interests = [
   "Home & Garden",
 ];
 
-class InterestsScreen extends StatelessWidget {
+class InterestsScreen extends StatefulWidget {
   const InterestsScreen({super.key});
+
+  @override
+  State<InterestsScreen> createState() => _InterestsScreenState();
+}
+
+class _InterestsScreenState extends State<InterestsScreen> {
+  final ScrollController _scrollController = ScrollController();
+  // (1)Announce a final property named as '_scrollController,
+  // the type of this variable is ScrollController
+  // it is initialized as ScrollController().
+  bool _showTitle = false;
+
+  void _onScroll() {
+    if (_scrollController.offset > 143) {
+      if (_showTitle) return;
+      // This code prevents calling setstate everytime when the scroll number is increasing
+      // more than 100.
+      setState(
+        () {
+          _showTitle = true;
+        },
+      );
+    } else {
+      setState(
+        () {
+          _showTitle = false;
+        },
+      );
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _scrollController.addListener(_onScroll);
+  }
+// (4)Create an eventlistener inside the initState and dispose.
+
+  @override
+  void dispose() {
+    super.dispose();
+    _scrollController.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -52,77 +97,62 @@ class InterestsScreen extends StatelessWidget {
       appBar: AppBar(
         elevation: 2,
         surfaceTintColor: Colors.white,
-        title: const Text("Choose Your Interests"),
+        title: AnimatedOpacity(
+          opacity: _showTitle ? 1.0 : 0.0,
+          duration: const Duration(milliseconds: 300),
+          child: const Text("Choose Your Interests"),
+        ),
       ),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.only(
-            right: Sizes.size24,
-            left: Sizes.size24,
-            bottom: Sizes.size16,
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Gaps.v32,
-              const Text(
-                'Choose your interests',
-                style: TextStyle(
-                  fontSize: Sizes.size40,
-                  fontWeight: FontWeight.w700,
+      body: Scrollbar(
+        controller: _scrollController,
+        // (3) Wrap SingleChildScrollView with the Scrollbar widget
+        // and put _scrollController at Scrollbar too.
+        child: SingleChildScrollView(
+          controller: _scrollController,
+          // (2)deliver the controller we made at SingleChildscrollVeiw
+          child: Padding(
+            padding: const EdgeInsets.only(
+              right: Sizes.size24,
+              left: Sizes.size24,
+              bottom: Sizes.size16,
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Gaps.v32,
+                const Text(
+                  'Choose your interests',
+                  style: TextStyle(
+                    fontSize: Sizes.size40,
+                    fontWeight: FontWeight.w700,
+                  ),
                 ),
-              ),
-              Gaps.v12,
-              Text(
-                'Get better video recommendations.',
-                style: TextStyle(
-                  fontSize: Sizes.size20,
-                  color: Colors.grey.shade600,
+                Gaps.v12,
+                Text(
+                  'Get better video recommendations.',
+                  style: TextStyle(
+                    fontSize: Sizes.size20,
+                    color: Colors.grey.shade600,
+                  ),
                 ),
-              ),
-              Gaps.v64,
-              Wrap(
-                // wrap puts children horizontally. But if the child can not
-                // be put in one line, it will go to the next line.
-                runSpacing: 15,
-                // Put the space between the lines of children (vertically).
-                spacing: 15,
-                // Put the space between the childrens horizontally.
-                children: [
-                  for (var interest in interests)
-                    // Instead of collection for, 'ListViewBuilder' is better,
-                    // as it only renders the items only shown in the screen.
-                    // when the number of items is big.
-                    Container(
-                      padding: const EdgeInsets.symmetric(
-                        vertical: Sizes.size16,
-                        horizontal: Sizes.size24,
-                      ),
-                      decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(
-                            Sizes.size32,
-                          ),
-                          border: Border.all(
-                            color: Colors.black.withOpacity(0.1),
-                          ),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.black.withOpacity(0.05),
-                              blurRadius: 5,
-                              spreadRadius: 5,
-                            ),
-                          ]),
-                      child: Text(
-                        interest,
-                        style: const TextStyle(
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
-                ],
-              ),
-            ],
+                Gaps.v64,
+                Wrap(
+                  // wrap puts children horizontally. But if the child can not
+                  // be put in one line, it will go to the next line.
+                  runSpacing: 15,
+                  // Put the space between the lines of children (vertically).
+                  spacing: 15,
+                  // Put the space between the childrens horizontally.
+                  children: [
+                    for (var interest in interests)
+                      // Instead of collection for, 'ListViewBuilder' is better,
+                      // as it only renders the items only shown in the screen.
+                      // when the number of items is big.
+                      InterestButton(interest: interest),
+                  ],
+                ),
+              ],
+            ),
           ),
         ),
       ),
@@ -132,25 +162,37 @@ class InterestsScreen extends StatelessWidget {
         surfaceTintColor: Colors.white,
         child: Padding(
           padding: const EdgeInsets.only(
-            top: Sizes.size16,
-            bottom: Sizes.size14,
+            top: Sizes.size10,
+            bottom: Sizes.size10,
             right: Sizes.size12,
             left: Sizes.size12,
           ),
-          child: Container(
-            padding: const EdgeInsets.symmetric(vertical: Sizes.size14),
-            decoration: BoxDecoration(
-              color: Theme.of(context).colorScheme.onPrimary,
-            ),
+
+          child: CupertinoButton(
+            onPressed: () {},
+            // empty function : () {}
+            color: Theme.of(context).colorScheme.onPrimary,
             child: const Text(
               'Next',
-              textAlign: TextAlign.center,
               style: TextStyle(
-                color: Colors.white,
-                fontSize: Sizes.size16,
+                color: Colors.white, // Set the desired text color
               ),
             ),
           ),
+          // child: Container(
+          //   padding: const EdgeInsets.symmetric(vertical: Sizes.size14),
+          //   decoration: BoxDecoration(
+          //     color: Theme.of(context).colorScheme.onPrimary,
+          //   ),
+          //   child: const Text(
+          //     'Next',
+          //     textAlign: TextAlign.center,
+          //     style: TextStyle(
+          //       color: Colors.white,
+          //       fontSize: Sizes.size16,
+          //     ),
+          //   ),
+          // ),
         ),
       ),
     );
