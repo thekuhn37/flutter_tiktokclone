@@ -25,10 +25,17 @@ class _LoginFormScreenState extends State<LoginFormScreen> {
       if (_formKey.currentState!.validate()) {
         _formKey.currentState!.save();
         // print(formData);
-        Navigator.of(context).push(
+        Navigator.of(context).pushAndRemoveUntil(
           MaterialPageRoute(
             builder: (context) => const InterestsScreen(),
           ),
+          (route) {
+            // print(route);
+            return false;
+          },
+          // (route){} : It is a predicate function which gets route
+          // and return boolean. If the boolean is true, the targeted
+          // route stay exist in the navigation stack. False? vice versa.
         );
       }
     }
