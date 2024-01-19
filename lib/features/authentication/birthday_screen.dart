@@ -36,10 +36,10 @@ class _BirthdayScreenState extends State<BirthdayScreen> {
       MaterialPageRoute(
         builder: (context) => const InterestsScreen(),
       ),
-      (route) {
-        // print(route);
-        return false;
-      },
+      (route) => false,
+      // (route) {
+      //   return false;
+      // }, 간단한 함수는 위와 같이 한 줄 표현 가능.
     );
   }
 
