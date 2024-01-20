@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -37,28 +38,24 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        body: screens[_selectedIndex],
-        bottomNavigationBar: NavigationBar(
-          labelBehavior: NavigationDestinationLabelBehavior.onlyShowSelected,
-          selectedIndex: _selectedIndex,
-          onDestinationSelected: _onTap,
-          destinations: const [
-            NavigationDestination(
-              icon: FaIcon(
-                FontAwesomeIcons.house,
-                color: Colors.teal,
-              ),
-              label: 'Home',
-            ),
-            NavigationDestination(
-              icon: FaIcon(
-                FontAwesomeIcons.magnifyingGlass,
-                color: Colors.amber,
-              ),
-              label: 'Search',
-            ),
-          ],
-        ));
+    return CupertinoTabScaffold(
+      // To make a cupertino style navigation bar, we should replace
+      // 'scaffold' to 'cupertinotabscaffold'.
+      tabBar: CupertinoTabBar(
+        items: const [
+          BottomNavigationBarItem(
+            icon: FaIcon(CupertinoIcons.home),
+            label: "Home",
+          ),
+          BottomNavigationBarItem(
+            icon: FaIcon(CupertinoIcons.search),
+            label: "Search",
+          ),
+        ],
+      ),
+      // Use CupertinoTapBar.
+      tabBuilder: (context, index) => screens[index],
+      // tabbuilder is a function that returns widgets.
+    );
   }
 }
