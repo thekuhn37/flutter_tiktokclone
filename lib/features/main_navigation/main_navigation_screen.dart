@@ -38,49 +38,27 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: screens[_selectedIndex],
-      bottomNavigationBar: BottomNavigationBar(
-        type: BottomNavigationBarType.shifting,
-        // When the type is set as 'shifting', then the backgroundcolor
-        // will be shown even when the number of icon is less than 4.
-        currentIndex: _selectedIndex,
-        onTap: _onTap,
-        backgroundColor: Colors.white,
-        selectedItemColor: Theme.of(context).colorScheme.onPrimary,
-        // unselectedItemColor: Colors.black,
-        items: const [
-          BottomNavigationBarItem(
-            icon: FaIcon(FontAwesomeIcons.house),
-            label: "Home",
-            tooltip: "What are you?",
-            backgroundColor: Colors.amber,
-          ),
-          BottomNavigationBarItem(
-            icon: FaIcon(FontAwesomeIcons.magnifyingGlass),
-            label: "Search",
-            tooltip: "What are you?",
-            backgroundColor: Colors.blue,
-          ),
-          BottomNavigationBarItem(
-            icon: FaIcon(FontAwesomeIcons.cartShopping),
-            label: "Cart",
-            tooltip: "What are you?",
-            backgroundColor: Colors.cyan,
-          ),
-          BottomNavigationBarItem(
-            icon: FaIcon(FontAwesomeIcons.user),
-            label: "Account",
-            tooltip: "What are you?",
-            backgroundColor: Colors.green,
-          ),
-          BottomNavigationBarItem(
-            icon: FaIcon(FontAwesomeIcons.shareNodes),
-            label: "Share",
-            tooltip: "What are you?",
-            backgroundColor: Colors.grey,
-          ),
-        ],
-      ),
-    );
+        body: screens[_selectedIndex],
+        bottomNavigationBar: NavigationBar(
+          labelBehavior: NavigationDestinationLabelBehavior.onlyShowSelected,
+          selectedIndex: _selectedIndex,
+          onDestinationSelected: _onTap,
+          destinations: const [
+            NavigationDestination(
+              icon: FaIcon(
+                FontAwesomeIcons.house,
+                color: Colors.teal,
+              ),
+              label: 'Home',
+            ),
+            NavigationDestination(
+              icon: FaIcon(
+                FontAwesomeIcons.magnifyingGlass,
+                color: Colors.amber,
+              ),
+              label: 'Search',
+            ),
+          ],
+        ));
   }
 }
