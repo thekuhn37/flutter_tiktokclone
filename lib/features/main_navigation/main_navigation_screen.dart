@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:tiktokclone/constants/gaps.dart';
+import 'package:tiktokclone/features/main_navigation/widgets/nav_tab.dart';
 
 class MainNavigationScreen extends StatefulWidget {
   const MainNavigationScreen({super.key});
@@ -38,24 +40,45 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return CupertinoTabScaffold(
-      // To make a cupertino style navigation bar, we should replace
-      // 'scaffold' to 'cupertinotabscaffold'.
-      tabBar: CupertinoTabBar(
-        items: const [
-          BottomNavigationBarItem(
-            icon: FaIcon(CupertinoIcons.home),
-            label: "Home",
-          ),
-          BottomNavigationBarItem(
-            icon: FaIcon(CupertinoIcons.search),
-            label: "Search",
-          ),
-        ],
+    return Scaffold(
+      bottomNavigationBar: BottomAppBar(
+        color: Colors.black,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            NavTab(
+              label: 'Home',
+              icon: FontAwesomeIcons.house,
+              isSelected: _selectedIndex == 0,
+              onTap: () => _onTap(0),
+            ),
+            NavTab(
+              label: 'Discover',
+              icon: FontAwesomeIcons.magnifyingGlass,
+              isSelected: _selectedIndex == 1,
+              onTap: () => _onTap(1),
+            ),
+            NavTab(
+              label: 'Add',
+              icon: FontAwesomeIcons.plus,
+              isSelected: _selectedIndex == 2,
+              onTap: () => _onTap(2),
+            ),
+            NavTab(
+              label: 'Inbox',
+              icon: FontAwesomeIcons.message,
+              isSelected: _selectedIndex == 3,
+              onTap: () => _onTap(3),
+            ),
+            NavTab(
+              label: 'Profile',
+              icon: FontAwesomeIcons.user,
+              isSelected: _selectedIndex == 4,
+              onTap: () => _onTap(4),
+            ),
+          ],
+        ),
       ),
-      // Use CupertinoTapBar.
-      tabBuilder: (context, index) => screens[index],
-      // tabbuilder is a function that returns widgets.
     );
   }
 }
