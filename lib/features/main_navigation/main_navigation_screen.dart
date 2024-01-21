@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tiktokclone/constants/gaps.dart';
+import 'package:tiktokclone/features/main_navigation/stf_screen.dart';
 import 'package:tiktokclone/features/main_navigation/widgets/nav_tab.dart';
 
 class MainNavigationScreen extends StatefulWidget {
@@ -14,25 +15,6 @@ class MainNavigationScreen extends StatefulWidget {
 class _MainNavigationScreenState extends State<MainNavigationScreen> {
   int _selectedIndex = 0;
 
-  final screens = [
-    const Center(
-      child: Text('Home'),
-    ),
-    const Center(
-      child: Text('Search'),
-    ),
-    Container(),
-    // const Center(
-    //   child: Text('Add'),
-    // ),
-    const Center(
-      child: Text('Inbox'),
-    ),
-    const Center(
-      child: Text('Profile'),
-    ),
-  ];
-
   void _onTap(int index) {
     setState(() {
       _selectedIndex = index;
@@ -42,7 +24,26 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: screens[_selectedIndex],
+      body: Stack(
+        children: [
+          Offstage(
+            offstage: _selectedIndex == 0 ? false : true,
+            child: const StfScreen(),
+          ),
+          Offstage(
+            offstage: _selectedIndex == 1 ? false : true,
+            child: const StfScreen(),
+          ),
+          Offstage(
+            offstage: _selectedIndex == 3 ? false : true,
+            child: const StfScreen(),
+          ),
+          Offstage(
+            offstage: _selectedIndex == 4 ? false : true,
+            child: const StfScreen(),
+          ),
+        ],
+      ),
       // or 'screens.elementAt(_selectedIndex)'
       bottomNavigationBar: BottomAppBar(
         color: Colors.black,
