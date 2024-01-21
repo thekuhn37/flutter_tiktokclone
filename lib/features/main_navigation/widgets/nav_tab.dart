@@ -6,6 +6,7 @@ import 'package:tiktokclone/constants/gaps.dart';
 class NavTab extends StatelessWidget {
   final String label;
   final IconData icon;
+  final IconData selectedicon;
   final bool isSelected;
   final Function onTap;
 
@@ -15,6 +16,7 @@ class NavTab extends StatelessWidget {
     required this.icon,
     required this.isSelected,
     required this.onTap,
+    required this.selectedicon,
   });
 
   @override
@@ -31,7 +33,7 @@ class NavTab extends StatelessWidget {
             child: Column(
               children: [
                 FaIcon(
-                  icon,
+                  isSelected ? selectedicon : icon,
                   color: Colors.white,
                 ),
                 Gaps.v5,

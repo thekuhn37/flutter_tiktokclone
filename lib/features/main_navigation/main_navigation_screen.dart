@@ -21,14 +21,15 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
     const Center(
       child: Text('Search'),
     ),
+    Container(),
+    // const Center(
+    //   child: Text('Add'),
+    // ),
     const Center(
-      child: Text('Cart'),
+      child: Text('Inbox'),
     ),
     const Center(
-      child: Text('Account'),
-    ),
-    const Center(
-      child: Text('Share'),
+      child: Text('Profile'),
     ),
   ];
 
@@ -41,6 +42,8 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      body: screens[_selectedIndex],
+      // or 'screens.elementAt(_selectedIndex)'
       bottomNavigationBar: BottomAppBar(
         color: Colors.black,
         child: Row(
@@ -48,30 +51,35 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
           children: [
             NavTab(
               label: 'Home',
+              selectedicon: FontAwesomeIcons.houseChimney,
               icon: FontAwesomeIcons.house,
               isSelected: _selectedIndex == 0,
               onTap: () => _onTap(0),
             ),
             NavTab(
               label: 'Discover',
+              selectedicon: FontAwesomeIcons.magnifyingGlassPlus,
               icon: FontAwesomeIcons.magnifyingGlass,
               isSelected: _selectedIndex == 1,
               onTap: () => _onTap(1),
             ),
             NavTab(
               label: 'Add',
+              selectedicon: FontAwesomeIcons.squarePlus,
               icon: FontAwesomeIcons.plus,
               isSelected: _selectedIndex == 2,
               onTap: () => _onTap(2),
             ),
             NavTab(
               label: 'Inbox',
+              selectedicon: FontAwesomeIcons.solidMessage,
               icon: FontAwesomeIcons.message,
               isSelected: _selectedIndex == 3,
               onTap: () => _onTap(3),
             ),
             NavTab(
               label: 'Profile',
+              selectedicon: FontAwesomeIcons.solidUser,
               icon: FontAwesomeIcons.user,
               isSelected: _selectedIndex == 4,
               onTap: () => _onTap(4),
