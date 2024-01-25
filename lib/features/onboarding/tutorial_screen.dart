@@ -1,8 +1,5 @@
-import 'dart:math';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:tiktokclone/constants/gaps.dart';
 import 'package:tiktokclone/constants/sizes.dart';
 import 'package:tiktokclone/features/main_navigation/main_navigation_screen.dart';
 import 'package:tiktokclone/features/onboarding/interests_screen.dart';

@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:tiktokclone/constants/sizes.dart';
 
@@ -20,7 +19,7 @@ class _StfScreenState extends State<StfScreen> {
 
   @override
   void dispose() {
-    print(_clicks);
+    // print(_clicks);
     super.dispose();
   }
 

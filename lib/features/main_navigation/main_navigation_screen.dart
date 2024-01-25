@@ -1,9 +1,9 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tiktokclone/constants/gaps.dart';
 import 'package:tiktokclone/features/main_navigation/stf_screen.dart';
 import 'package:tiktokclone/features/main_navigation/widgets/nav_tab.dart';
+import 'package:tiktokclone/features/main_navigation/widgets/post_video_button.dart';
 
 class MainNavigationScreen extends StatefulWidget {
   const MainNavigationScreen({super.key});
@@ -14,10 +14,31 @@ class MainNavigationScreen extends StatefulWidget {
 
 class _MainNavigationScreenState extends State<MainNavigationScreen> {
   int _selectedIndex = 0;
+  bool _onTapDown = false;
 
   void _onTap(int index) {
     setState(() {
       _selectedIndex = index;
+    });
+  }
+
+  void _onPostVideoButtonTap() {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => Scaffold(
+          appBar: AppBar(
+            title: const Text(
+              "Record Video",
+            ),
+          ),
+        ),
+        fullscreenDialog: true,
+        // Once this button is tapped, the screen will be
+        // on top of every thing else.
+      ),
+    );
+    setState(() {
+      _onTapDown = false;
     });
   }
 
@@ -48,6 +69,7 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
       bottomNavigationBar: BottomAppBar(
         color: Colors.black,
         child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             NavTab(
@@ -64,13 +86,19 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
               isSelected: _selectedIndex == 1,
               onTap: () => _onTap(1),
             ),
-            NavTab(
-              label: 'Add',
-              selectedicon: FontAwesomeIcons.squarePlus,
-              icon: FontAwesomeIcons.plus,
-              isSelected: _selectedIndex == 2,
-              onTap: () => _onTap(2),
+            Gaps.h24,
+            GestureDetector(
+              onTapDown: (details) {
+                setState(() {
+                  _onTapDown = true;
+                });
+              },
+              onTapUp: (details) => _onPostVideoButtonTap(),
+              child: PostVideoButton(
+                onTapDown: _onTapDown,
+              ),
             ),
+            Gaps.h24,
             NavTab(
               label: 'Inbox',
               selectedicon: FontAwesomeIcons.solidMessage,
