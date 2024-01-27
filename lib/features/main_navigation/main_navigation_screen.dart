@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tiktokclone/constants/gaps.dart';
-import 'package:tiktokclone/features/main_navigation/stf_screen.dart';
 import 'package:tiktokclone/features/main_navigation/widgets/nav_tab.dart';
 import 'package:tiktokclone/features/main_navigation/widgets/post_video_button.dart';
+import 'package:tiktokclone/features/videos/video_timeline_screen.dart';
 
 class MainNavigationScreen extends StatefulWidget {
   const MainNavigationScreen({super.key});
@@ -49,19 +49,19 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
         children: [
           Offstage(
             offstage: _selectedIndex == 0 ? false : true,
-            child: const StfScreen(),
+            child: const VideoTimelineScreen(),
           ),
           Offstage(
             offstage: _selectedIndex == 1 ? false : true,
-            child: const StfScreen(),
+            child: Container(),
           ),
           Offstage(
             offstage: _selectedIndex == 3 ? false : true,
-            child: const StfScreen(),
+            child: Container(),
           ),
           Offstage(
             offstage: _selectedIndex == 4 ? false : true,
-            child: const StfScreen(),
+            child: Container(),
           ),
         ],
       ),

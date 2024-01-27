@@ -4,12 +4,10 @@ import 'package:tiktokclone/constants/sizes.dart';
 
 class PostVideoButton extends StatelessWidget {
   final bool onTapDown;
-  final bool inverted;
 
   const PostVideoButton({
     super.key,
     required this.onTapDown,
-    required this.inverted,
   });
 
   @override
