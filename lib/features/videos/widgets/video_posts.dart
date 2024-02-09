@@ -18,11 +18,17 @@ class VideoPost extends StatefulWidget {
   State<VideoPost> createState() => _VideoPostState();
 }
 
-class _VideoPostState extends State<VideoPost> {
+class _VideoPostState extends State<VideoPost>
+    with SingleTickerProviderStateMixin {
   final VideoPlayerController _videoPlayerController =
       VideoPlayerController.asset(
-    "assets/videos/IMG_1705.mp4",
+    "assets/videos/IMG_1689.MOV",
   );
+
+  late final AnimationController _animationController;
+
+  bool _isPaused = false;
+  final Duration _animationDuration = const Duration(milliseconds: 200);
 
   void _onVideoChange() {
     if (_videoPlayerController.value.isInitialized) {
@@ -35,8 +41,6 @@ class _VideoPostState extends State<VideoPost> {
 
   void _initVideoPlayer() async {
     await _videoPlayerController.initialize();
-    // _videoPlayerController.play();
-    // it was for auto play.
     setState(() {});
     _videoPlayerController.addListener(_onVideoChange);
   }
@@ -45,6 +49,18 @@ class _VideoPostState extends State<VideoPost> {
   void initState() {
     super.initState();
     _initVideoPlayer();
+    _animationController = AnimationController(
+      vsync: this,
+      lowerBound: 1.0,
+      upperBound: 1.5,
+      value: 1.5,
+      duration: _animationDuration,
+    );
+    _animationController.addListener(() {
+      setState(
+        () {},
+      );
+    });
   }
 
   @override
@@ -62,9 +78,14 @@ class _VideoPostState extends State<VideoPost> {
   void _onTogglePause() {
     if (_videoPlayerController.value.isPlaying) {
       _videoPlayerController.pause();
+      _animationController.reverse();
     } else {
       _videoPlayerController.play();
+      _animationController.forward();
     }
+    setState(() {
+      _isPaused = !_isPaused;
+    });
   }
 
   @override
@@ -87,7 +108,7 @@ class _VideoPostState extends State<VideoPost> {
               onTap: _onTogglePause,
             ),
           ),
-          const Positioned.fill(
+          Positioned.fill(
             // position can not be wrapped by other widget, as position
             // must be the child of a stack.
             child: IgnorePointer(
@@ -95,10 +116,17 @@ class _VideoPostState extends State<VideoPost> {
               // the event does not go to the icon, but it goes to the
               // background(gesturedetector).
               child: Center(
-                child: FaIcon(
-                  FontAwesomeIcons.circlePlay,
-                  color: Color.fromRGBO(255, 255, 255, 0.5),
-                  size: Sizes.size96,
+                child: Transform.scale(
+                  scale: _animationController.value,
+                  child: AnimatedOpacity(
+                    opacity: _isPaused ? 1 : 0,
+                    duration: _animationDuration,
+                    child: const FaIcon(
+                      FontAwesomeIcons.play,
+                      color: Color.fromRGBO(255, 255, 255, 0.5),
+                      size: Sizes.size96,
+                    ),
+                  ),
                 ),
               ),
             ),
