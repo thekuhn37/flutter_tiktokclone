@@ -29,10 +29,11 @@ class _VideoTimelineScreenState extends State<VideoTimelineScreen> {
   // .addAll : it adds the elements in a list to the list .addAll is called.
 
   _onVideoFinished() {
-    _pageController.nextPage(
-      duration: _scrollDuration,
-      curve: _scrollCurve,
-    );
+    return;
+    // _pageController.nextPage(
+    //   duration: _scrollDuration,
+    //   curve: _scrollCurve,
+    // );
   }
   // Animate the user to the another screen.
 
