@@ -32,6 +32,16 @@ class _VideoPostState extends State<VideoPost>
   bool _isPaused = false;
   final Duration _animationDuration = const Duration(milliseconds: 200);
 
+  bool _areTagsHidden = true;
+  final List _hashTags = [
+    '#SRT',
+    '#Busan',
+    '#Travel',
+    '#Train',
+    '2024',
+    'MacAir'
+  ];
+
   void _onVideoChange() {
     if (_videoPlayerController.value.isInitialized) {
       if (_videoPlayerController.value.duration ==
@@ -135,13 +145,13 @@ class _VideoPostState extends State<VideoPost>
               ),
             ),
           ),
-          const Positioned(
+          Positioned(
             bottom: 20,
             left: 10,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
+                const Text(
                   '@Harry.Hwang',
                   style: TextStyle(
                     fontSize: Sizes.size16,
@@ -150,12 +160,60 @@ class _VideoPostState extends State<VideoPost>
                   ),
                 ),
                 Gaps.v10,
-                Text(
+                const Text(
                   'The first SRT ride heading to Busan!!',
                   style: TextStyle(
                     fontSize: Sizes.size16,
                     color: Colors.white,
                   ),
+                ),
+                Gaps.v10,
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    SizedBox(
+                      width: 170,
+                      child: Text(
+                        _areTagsHidden
+                            ? _hashTags.take(3).join(
+                                ' ') // Show only first three elements if _areTagsHidden is true
+                            : _hashTags.join(
+                                ' '), // Show all elements if _areTagsHidden is false
+                        style: const TextStyle(
+                          fontSize: Sizes.size16,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+                    Text(
+                      _areTagsHidden ? '...' : '   ',
+                      style: const TextStyle(
+                        fontSize: Sizes.size16,
+                        color: Colors.white,
+                      ),
+                    ),
+                    TextButton(
+                      onPressed: () {
+                        setState(() {
+                          _areTagsHidden = !_areTagsHidden;
+                        });
+                      },
+                      style: ButtonStyle(
+                          padding:
+                              MaterialStateProperty.all<EdgeInsetsGeometry>(
+                            EdgeInsets.zero, // Set padding to zero
+                          ),
+                          alignment: Alignment.topCenter),
+                      child: Text(
+                        _areTagsHidden
+                            ? 'See more'
+                            : 'Hide', // Change button text based on _areTagsHidden
+                        style: const TextStyle(
+                          color: Colors.white,
+                        ),
+                      ),
+                    )
+                  ],
                 ),
               ],
             ),
