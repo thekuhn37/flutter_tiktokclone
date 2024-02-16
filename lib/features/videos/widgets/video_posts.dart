@@ -84,6 +84,9 @@ class _VideoPostState extends State<VideoPost>
         !_videoPlayerController.value.isPlaying) {
       _videoPlayerController.play();
     }
+    if (_videoPlayerController.value.isPlaying && info.visibleFraction == 0) {
+      _onTogglePause();
+    }
   }
 
   void _onTogglePause() {
@@ -215,6 +218,7 @@ class _VideoPostState extends State<VideoPost>
                         });
                       },
                       style: ButtonStyle(
+                          splashFactory: NoSplash.splashFactory,
                           padding:
                               MaterialStateProperty.all<EdgeInsetsGeometry>(
                             EdgeInsets.zero, // Set padding to zero

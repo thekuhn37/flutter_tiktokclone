@@ -4,14 +4,37 @@ import 'package:tiktokclone/constants/sizes.dart';
 
 class PostVideoButton extends StatelessWidget {
   final bool onTapDown;
+  final bool inverted;
 
   const PostVideoButton({
     super.key,
     required this.onTapDown,
+    required this.inverted,
   });
 
   @override
   Widget build(BuildContext context) {
+    Color containerColor;
+    if (onTapDown) {
+      containerColor =
+          Colors.grey.shade500; // Set color to grey when onTapDown is true
+    } else {
+      containerColor = inverted
+          ? Colors.black
+          : Colors
+              .white; // Set color to black when inverted is true, otherwise white
+    }
+
+    Color iconColor;
+    if (onTapDown) {
+      iconColor = Colors.white; // Set color to grey when onTapDown is true
+    } else {
+      iconColor = inverted
+          ? Colors.white
+          : Colors
+              .black; // Set color to black when inverted is true, otherwise white
+    }
+
     return Stack(
       clipBehavior: Clip.none,
       children: [
@@ -51,7 +74,7 @@ class PostVideoButton extends StatelessWidget {
             horizontal: Sizes.size16,
           ),
           decoration: BoxDecoration(
-            color: onTapDown ? Colors.grey.shade500 : Colors.white,
+            color: containerColor,
             borderRadius: BorderRadius.circular(
               Sizes.size10,
             ),
@@ -60,7 +83,7 @@ class PostVideoButton extends StatelessWidget {
           child: Center(
             child: FaIcon(
               FontAwesomeIcons.plus,
-              color: onTapDown ? Colors.white : Colors.black,
+              color: iconColor,
               size: Sizes.size20,
             ),
           ),

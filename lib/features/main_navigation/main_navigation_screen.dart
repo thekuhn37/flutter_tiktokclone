@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tiktokclone/constants/gaps.dart';
+import 'package:tiktokclone/features/discover/discover_screen.dart';
 import 'package:tiktokclone/features/main_navigation/widgets/nav_tab.dart';
 import 'package:tiktokclone/features/main_navigation/widgets/post_video_button.dart';
 import 'package:tiktokclone/features/videos/video_timeline_screen.dart';
@@ -13,7 +14,7 @@ class MainNavigationScreen extends StatefulWidget {
 }
 
 class _MainNavigationScreenState extends State<MainNavigationScreen> {
-  int _selectedIndex = 0;
+  int _selectedIndex = 1;
   bool _onTapDown = false;
 
   void _onTap(int index) {
@@ -55,7 +56,7 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
           ),
           Offstage(
             offstage: _selectedIndex == 1 ? false : true,
-            child: Container(),
+            child: const DiscoverScreen(),
           ),
           Offstage(
             offstage: _selectedIndex == 3 ? false : true,
@@ -69,25 +70,26 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
       ),
       // or 'screens.elementAt(_selectedIndex)'
       bottomNavigationBar: BottomAppBar(
-        color: Colors.black,
+        elevation: 0,
+        color: _selectedIndex == 0 ? Colors.black : Colors.white,
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             NavTab(
-              label: 'Home',
-              selectedicon: FontAwesomeIcons.houseChimney,
-              icon: FontAwesomeIcons.house,
-              isSelected: _selectedIndex == 0,
-              onTap: () => _onTap(0),
-            ),
+                label: 'Home',
+                selectedicon: FontAwesomeIcons.houseChimney,
+                icon: FontAwesomeIcons.house,
+                isSelected: _selectedIndex == 0,
+                onTap: () => _onTap(0),
+                selectedindex: _selectedIndex),
             NavTab(
-              label: 'Discover',
-              selectedicon: FontAwesomeIcons.magnifyingGlassPlus,
-              icon: FontAwesomeIcons.magnifyingGlass,
-              isSelected: _selectedIndex == 1,
-              onTap: () => _onTap(1),
-            ),
+                label: 'Discover',
+                selectedicon: FontAwesomeIcons.magnifyingGlassPlus,
+                icon: FontAwesomeIcons.magnifyingGlass,
+                isSelected: _selectedIndex == 1,
+                onTap: () => _onTap(1),
+                selectedindex: _selectedIndex),
             Gaps.h24,
             GestureDetector(
               onTapDown: (details) {
@@ -98,23 +100,24 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
               onTapUp: (details) => _onPostVideoButtonTap(),
               child: PostVideoButton(
                 onTapDown: _onTapDown,
+                inverted: _selectedIndex != 0,
               ),
             ),
             Gaps.h24,
             NavTab(
-              label: 'Inbox',
-              selectedicon: FontAwesomeIcons.solidMessage,
-              icon: FontAwesomeIcons.message,
-              isSelected: _selectedIndex == 3,
-              onTap: () => _onTap(3),
-            ),
+                label: 'Inbox',
+                selectedicon: FontAwesomeIcons.solidMessage,
+                icon: FontAwesomeIcons.message,
+                isSelected: _selectedIndex == 3,
+                onTap: () => _onTap(3),
+                selectedindex: _selectedIndex),
             NavTab(
-              label: 'Profile',
-              selectedicon: FontAwesomeIcons.solidUser,
-              icon: FontAwesomeIcons.user,
-              isSelected: _selectedIndex == 4,
-              onTap: () => _onTap(4),
-            ),
+                label: 'Profile',
+                selectedicon: FontAwesomeIcons.solidUser,
+                icon: FontAwesomeIcons.user,
+                isSelected: _selectedIndex == 4,
+                onTap: () => _onTap(4),
+                selectedindex: _selectedIndex),
           ],
         ),
       ),
