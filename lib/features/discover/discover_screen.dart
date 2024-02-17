@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -18,17 +19,44 @@ final tabs = [
   "Records",
 ];
 
-class DiscoverScreen extends StatelessWidget {
+class DiscoverScreen extends StatefulWidget {
   const DiscoverScreen({super.key});
+
+  @override
+  State<DiscoverScreen> createState() => _DiscoverScreenState();
+}
+
+class _DiscoverScreenState extends State<DiscoverScreen> {
+  final TextEditingController _textEditingController =
+      TextEditingController(text: "Chest Press");
+
+  void _onSearchChanged(String value) {
+    print(value);
+  }
+
+  void _onSearchSubmitted(String value) {
+    print(value);
+  }
+
+  @override
+  void dispose() {
+    _textEditingController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
       length: tabs.length,
       child: Scaffold(
+        resizeToAvoidBottomInset: false,
         appBar: AppBar(
           // elevation: 1,
-          title: const Text('Discover'),
+          title: CupertinoSearchTextField(
+            controller: _textEditingController,
+            onChanged: _onSearchChanged,
+            onSubmitted: _onSearchSubmitted,
+          ),
           bottom: TabBar(
             splashFactory: NoSplash.splashFactory,
             tabAlignment: TabAlignment.start,
@@ -49,6 +77,7 @@ class DiscoverScreen extends StatelessWidget {
         ),
         body: TabBarView(children: [
           GridView.builder(
+              keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
               padding: const EdgeInsets.all(Sizes.size6),
               itemCount: 20,
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
@@ -59,14 +88,22 @@ class DiscoverScreen extends StatelessWidget {
               ),
               itemBuilder: (context, index) => Column(
                     children: [
-                      AspectRatio(
-                        aspectRatio: 9 / 16,
-                        // width / height
-                        child: FadeInImage.assetNetwork(
-                            fit: BoxFit.cover,
-                            placeholder: "assets/images/placeholder.jpg",
-                            image:
-                                "https://steelfitusa.com/cdn/shop/articles/The-Anatomy-of-the-Biceps.jpg?v=1660142064&width=1500"),
+                      Container(
+                        clipBehavior: Clip.hardEdge,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(
+                            Sizes.size8,
+                          ),
+                        ),
+                        child: AspectRatio(
+                          aspectRatio: 9 / 16,
+                          // width / height
+                          child: FadeInImage.assetNetwork(
+                              fit: BoxFit.cover,
+                              placeholder: "assets/images/placeholder.jpg",
+                              image:
+                                  "https://steelfitusa.com/cdn/shop/articles/The-Anatomy-of-the-Biceps.jpg?v=1660142064&width=1500"),
+                        ),
                       ),
                       Gaps.v14,
                       const Text(

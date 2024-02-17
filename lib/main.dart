@@ -17,6 +17,11 @@ class TikTokApp extends StatelessWidget {
         // 여기서 전체적인 컨트롤 센터 역할을 할 수 있다.
         scaffoldBackgroundColor: Colors.white,
         // 이렇게 하면 모든 scaffold 배경색 한번에 변경된다.
+        textSelectionTheme: const TextSelectionThemeData(
+          cursorColor: Color(
+            0xFFE9435A,
+          ),
+        ),
         colorScheme: ColorScheme.fromSeed(
           seedColor: Colors.white,
           onPrimary: const Color(0xFFE9435A),
