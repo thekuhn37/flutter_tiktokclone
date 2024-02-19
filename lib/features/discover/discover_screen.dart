@@ -1,4 +1,4 @@
-import 'dart:math';
+// import 'dart:math';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -38,6 +38,10 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
     print(value);
   }
 
+  void _clearWriting() {
+    _textEditingController.clear();
+  }
+
   @override
   void dispose() {
     _textEditingController.dispose();
@@ -52,11 +56,56 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
         resizeToAvoidBottomInset: false,
         appBar: AppBar(
           // elevation: 1,
-          title: CupertinoSearchTextField(
-            controller: _textEditingController,
-            onChanged: _onSearchChanged,
-            onSubmitted: _onSearchSubmitted,
+          title: SizedBox(
+            height: 40,
+            child: TextField(
+              onChanged: _onSearchChanged,
+              onSubmitted: _onSearchSubmitted,
+              controller: _textEditingController,
+              decoration: InputDecoration(
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(Sizes.size12),
+                  borderSide: BorderSide.none,
+                ),
+                filled: true,
+                fillColor: Colors.grey.shade200,
+                contentPadding: const EdgeInsets.symmetric(
+                  horizontal: Sizes.size12,
+                  vertical: Sizes.size4,
+                ),
+                prefixIcon: const Padding(
+                  padding: EdgeInsets.only(
+                    top: Sizes.size10,
+                    left: Sizes.size10,
+                  ),
+                  child: FaIcon(
+                    FontAwesomeIcons.magnifyingGlass,
+                    size: Sizes.size20,
+                  ),
+                ),
+                suffixIcon: GestureDetector(
+                  onTap: _clearWriting,
+                  child: const Padding(
+                    padding: EdgeInsets.only(
+                      top: Sizes.size10,
+                      left: Sizes.size20,
+                    ),
+                    child: FaIcon(
+                      FontAwesomeIcons.solidCircleXmark,
+                      size: Sizes.size20,
+                    ),
+                  ),
+                ),
+              ),
+              textInputAction: TextInputAction.go,
+              cursorColor: Theme.of(context).colorScheme.onPrimary,
+            ),
           ),
+          // CupertinoSearchTextField(
+          //   controller: _textEditingController,
+          //   onChanged: _onSearchChanged,
+          //   onSubmitted: _onSearchSubmitted,
+          // ),
           bottom: TabBar(
             splashFactory: NoSplash.splashFactory,
             tabAlignment: TabAlignment.start,
@@ -67,6 +116,9 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
                 fontWeight: FontWeight.w600, fontSize: Sizes.size16),
             labelColor: Colors.black,
             indicatorColor: Colors.black,
+            onTap: (_) {
+              FocusScope.of(context).unfocus();
+            },
             tabs: [
               for (var tab in tabs)
                 Tab(
