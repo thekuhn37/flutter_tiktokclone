@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:tiktokclone/constants/breaktpoints.dart';
 import 'package:tiktokclone/constants/gaps.dart';
 import 'package:tiktokclone/constants/sizes.dart';
 
@@ -26,42 +27,92 @@ class DiscoverScreen extends StatefulWidget {
   State<DiscoverScreen> createState() => _DiscoverScreenState();
 }
 
-class _DiscoverScreenState extends State<DiscoverScreen> {
-  final TextEditingController _textEditingController =
-      TextEditingController(text: "Chest Press");
+class _DiscoverScreenState extends State<DiscoverScreen>
+    with SingleTickerProviderStateMixin {
+  bool _isWriting = false;
+  late final TextEditingController _textEditingController;
+  late final TabController _tabController;
 
-  void _onSearchChanged(String value) {
-    print(value);
-  }
+  // void _onSearchChanged(String value) {
+  //   print(value);
+  // }
 
-  void _onSearchSubmitted(String value) {
-    print(value);
-  }
+  // void _onSearchSubmitted(String value) {
+  //   print(value);
+  // }
 
-  void _clearWriting() {
-    _textEditingController.clear();
+  @override
+  void initState() {
+    _isWriting = false;
+    _textEditingController = TextEditingController();
+    _tabController = TabController(length: tabs.length, vsync: this);
+    super.initState();
   }
 
   @override
   void dispose() {
+    _tabController.dispose();
     _textEditingController.dispose();
     super.dispose();
   }
 
+  void _onClearTapped() {
+    _textEditingController.clear();
+    setState(() {
+      _isWriting = false;
+    });
+  }
+
+  void _onTextChanged(String text) {
+    setState(
+      () {
+        text.isNotEmpty ? _isWriting = true : _isWriting = false;
+      },
+    );
+  }
+
+  void _onTextSubmitted(String text) {
+    FocusScope.of(context).unfocus();
+    print(_textEditingController.value);
+    setState(() {
+      _isWriting = false;
+    });
+  }
+
+  void _onTapbarTapped(int num) {
+    FocusScope.of(context).unfocus();
+    setState(
+      () {
+        _tabController.index = num;
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
+    final width = MediaQuery.of(context).size.width;
+
     return DefaultTabController(
       length: tabs.length,
       child: Scaffold(
         resizeToAvoidBottomInset: false,
         appBar: AppBar(
           // elevation: 1,
-          title: SizedBox(
-            height: 40,
+          centerTitle: true,
+          title: Container(
+            constraints: const BoxConstraints(
+              maxWidth: Breakpoints.sm,
+            ),
+            // height: 40,
             child: TextField(
-              onChanged: _onSearchChanged,
-              onSubmitted: _onSearchSubmitted,
               controller: _textEditingController,
+              onChanged: _onTextChanged,
+              onSubmitted: _onTextSubmitted,
+              textInputAction: TextInputAction.go,
+              cursorColor: Theme.of(context).colorScheme.onPrimary,
+              style: const TextStyle(
+                color: Colors.black,
+              ),
               decoration: InputDecoration(
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(Sizes.size12),
@@ -83,22 +134,23 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
                     size: Sizes.size20,
                   ),
                 ),
-                suffixIcon: GestureDetector(
-                  onTap: _clearWriting,
-                  child: const Padding(
-                    padding: EdgeInsets.only(
-                      top: Sizes.size10,
-                      left: Sizes.size20,
-                    ),
-                    child: FaIcon(
-                      FontAwesomeIcons.solidCircleXmark,
-                      size: Sizes.size20,
-                    ),
-                  ),
-                ),
+                suffixIcon: _isWriting
+                    ? Padding(
+                        padding: const EdgeInsets.only(
+                          top: Sizes.size12,
+                          right: Sizes.size6,
+                        ),
+                        child: GestureDetector(
+                          onTap: _onClearTapped,
+                          child: const FaIcon(
+                            FontAwesomeIcons.solidCircleXmark,
+                            size: Sizes.size20,
+                            color: Colors.black45,
+                          ),
+                        ),
+                      )
+                    : null,
               ),
-              textInputAction: TextInputAction.go,
-              cursorColor: Theme.of(context).colorScheme.onPrimary,
             ),
           ),
           // CupertinoSearchTextField(
@@ -107,18 +159,19 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
           //   onSubmitted: _onSearchSubmitted,
           // ),
           bottom: TabBar(
+            controller: _tabController,
+            onTap: _onTapbarTapped,
             splashFactory: NoSplash.splashFactory,
             tabAlignment: TabAlignment.start,
-            padding: const EdgeInsets.symmetric(horizontal: Sizes.size16),
+            padding: const EdgeInsets.symmetric(
+              horizontal: Sizes.size16,
+            ),
             isScrollable: true,
             unselectedLabelColor: Colors.grey,
             labelStyle: const TextStyle(
                 fontWeight: FontWeight.w600, fontSize: Sizes.size16),
             labelColor: Colors.black,
             indicatorColor: Colors.black,
-            onTap: (_) {
-              FocusScope.of(context).unfocus();
-            },
             tabs: [
               for (var tab in tabs)
                 Tab(
@@ -127,13 +180,13 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
             ],
           ),
         ),
-        body: TabBarView(children: [
+        body: TabBarView(controller: _tabController, children: [
           GridView.builder(
               keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
               padding: const EdgeInsets.all(Sizes.size6),
               itemCount: 20,
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: width > Breakpoints.md ? 5 : 2,
                 crossAxisSpacing: Sizes.size10,
                 mainAxisSpacing: Sizes.size10,
                 childAspectRatio: 9 / 22,
