@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tiktokclone/constants/sizes.dart';
+import 'package:tiktokclone/features/inbox/activity_screen.dart';
 import 'package:tiktokclone/features/main_navigation/main_navigation_screen.dart';
 
 void main() {
@@ -41,7 +42,7 @@ class TikTokApp extends StatelessWidget {
         splashColor: Colors.transparent,
         highlightColor: Colors.transparent,
       ),
-      home: const MainNavigationScreen(),
+      home: const ActivityScreen(),
       // SignUpScreen()
     );
   }
