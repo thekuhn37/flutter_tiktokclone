@@ -17,6 +17,7 @@ class _ActivityScreenState extends State<ActivityScreen>
   final List<String> _notifications = List.generate(20, (index) => "${index}h");
 
   bool _showBarrier = false;
+  // we call it as a flag.
 
   final List<Map<String, dynamic>> _tabs = [
     {
@@ -47,7 +48,7 @@ class _ActivityScreenState extends State<ActivityScreen>
 
   late final AnimationController _animationController = AnimationController(
     vsync: this,
-    duration: const Duration(milliseconds: 300),
+    duration: const Duration(milliseconds: 200),
   );
 
   late final Animation<double> _arrowAnimation =
@@ -83,6 +84,22 @@ class _ActivityScreenState extends State<ActivityScreen>
       _showBarrier = !_showBarrier;
     });
   }
+  /*
+  Summary : From the beginning _showBarrier is default false so the Barrier widget is not shown yet.
+  When the toggleAnimation is called (the button is clicked) for the first time, then 
+  because _animationController is not completed at all, so the _animationController.forward() is
+  activated, and 'at the same time' (without any delay) setState is called toom so 
+  _showBarrier's value immediately truns from False to true, meaning the barrier is immediately
+  shown at the widget tree with its own function (blocking the other widgets behind the barrier).
+
+  On the other hand, if the button is clicked again so the toggleAnimation is called again,
+  because _animationController is completed, the first condition is fulfilled,
+  but as we make put 'await' in front of _animationController.reverse(), so the setState
+  will be called when '_animationController.reverse()' is over, meaning when the animation 
+  is over, then _showBarrier's value will change from True to False. 
+  That is the meaning of 'await' and as we use that syntax, we need to express 'async'
+  behind this function (_toggleAnimations())  
+  */
 
   @override
   Widget build(BuildContext context) {
@@ -92,6 +109,7 @@ class _ActivityScreenState extends State<ActivityScreen>
         title: GestureDetector(
           onTap: _toggleAnimations,
           child: Row(
+            mainAxisSize: MainAxisSize.min,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               const Text("All Activity"),

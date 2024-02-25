@@ -42,7 +42,7 @@ class TikTokApp extends StatelessWidget {
         splashColor: Colors.transparent,
         highlightColor: Colors.transparent,
       ),
-      home: const ActivityScreen(),
+      home: const MainNavigationScreen(),
       // SignUpScreen()
     );
   }
