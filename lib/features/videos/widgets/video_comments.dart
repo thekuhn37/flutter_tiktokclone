@@ -27,9 +27,11 @@ class _VideoCommentsState extends State<VideoComments> {
   }
 
   _onStartWriting() {
-    setState(() {
-      _isWriting = true;
-    });
+    setState(
+      () {
+        _isWriting = true;
+      },
+    );
   }
 
   @override
@@ -140,20 +142,20 @@ class _VideoCommentsState extends State<VideoComments> {
                         ),
                         Gaps.h10,
                         Expanded(
-                            child: SizedBox(
-                          height: 1000,
-                          child: TextField(
-                            onTap: _onStartWriting,
-                            expands: true,
-                            minLines: null,
-                            maxLines: null,
-                            textInputAction: TextInputAction.newline,
-                            cursorColor:
-                                Theme.of(context).colorScheme.onPrimary,
-                            style: const TextStyle(
-                              fontSize: Sizes.size14,
-                            ),
-                            decoration: InputDecoration(
+                          child: SizedBox(
+                            height: 1000,
+                            child: TextField(
+                              onTap: _onStartWriting,
+                              expands: true,
+                              minLines: null,
+                              maxLines: null,
+                              textInputAction: TextInputAction.newline,
+                              cursorColor:
+                                  Theme.of(context).colorScheme.onPrimary,
+                              style: const TextStyle(
+                                fontSize: Sizes.size14,
+                              ),
+                              decoration: InputDecoration(
                                 hintText: "Add a comment...",
                                 border: OutlineInputBorder(
                                   borderRadius:
@@ -200,9 +202,11 @@ class _VideoCommentsState extends State<VideoComments> {
                                         ),
                                     ],
                                   ),
-                                )),
+                                ),
+                              ),
+                            ),
                           ),
-                        )),
+                        ),
                       ],
                     ),
                   ),

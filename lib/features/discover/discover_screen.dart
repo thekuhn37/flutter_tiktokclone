@@ -74,9 +74,11 @@ class _DiscoverScreenState extends State<DiscoverScreen>
   void _onTextSubmitted(String text) {
     FocusScope.of(context).unfocus();
     print(_textEditingController.value);
-    setState(() {
-      _isWriting = false;
-    });
+    setState(
+      () {
+        _isWriting = false;
+      },
+    );
   }
 
   void _onTapbarTapped(int num) {
