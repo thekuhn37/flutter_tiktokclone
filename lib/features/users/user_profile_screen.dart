@@ -17,8 +17,9 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
         SliverAppBar(
           floating: true,
           stretch: true,
-          backgroundColor: Colors.teal,
+          // snap: true,
           pinned: true,
+          backgroundColor: Colors.teal,
           collapsedHeight: 80,
           expandedHeight: 200,
           flexibleSpace: FlexibleSpaceBar(
@@ -38,6 +39,35 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
             title: const Text('hello'),
           ),
         ),
+        SliverFixedExtentList(
+            delegate: SliverChildBuilderDelegate(
+              childCount: 50,
+              (context, index) => Container(
+                color: Colors.teal[100 * (index % 9)],
+                child: Align(
+                  alignment: Alignment.center,
+                  child: Text('Item $index'),
+                ),
+              ),
+            ),
+            itemExtent: 100),
+        SliverGrid(
+            delegate: SliverChildBuilderDelegate(
+              childCount: 50,
+              (context, index) => Container(
+                color: Colors.purple[100 * (index % 9)],
+                child: Align(
+                  alignment: Alignment.center,
+                  child: Text('Item $index'),
+                ),
+              ),
+            ),
+            gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+              maxCrossAxisExtent: 100,
+              mainAxisSpacing: Sizes.size10,
+              crossAxisSpacing: Sizes.size20,
+              childAspectRatio: 1,
+            ))
       ],
     );
   }
