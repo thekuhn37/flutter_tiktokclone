@@ -20,8 +20,8 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
           // snap: true,
           pinned: true,
           backgroundColor: Colors.teal,
-          collapsedHeight: 80,
-          expandedHeight: 200,
+          collapsedHeight: 60,
+          expandedHeight: 180,
           flexibleSpace: FlexibleSpaceBar(
             titlePadding: const EdgeInsets.symmetric(
               horizontal: Sizes.size20,
@@ -39,6 +39,16 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
             title: const Text('hello'),
           ),
         ),
+        const SliverToBoxAdapter(
+          child: Column(
+            children: [
+              CircleAvatar(
+                backgroundColor: Colors.red,
+                radius: 40,
+              )
+            ],
+          ),
+        ),
         SliverFixedExtentList(
             delegate: SliverChildBuilderDelegate(
               childCount: 50,
@@ -51,6 +61,10 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
               ),
             ),
             itemExtent: 100),
+        SliverPersistentHeader(
+          delegate: CustomDelegate(),
+          pinned: true,
+        ),
         SliverGrid(
             delegate: SliverChildBuilderDelegate(
               childCount: 50,
@@ -70,5 +84,44 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
             ))
       ],
     );
+  }
+}
+
+class CustomDelegate extends SliverPersistentHeaderDelegate {
+  // it requires many required methods and getters. So use code action to make them
+  // at one time.
+  @override
+  // this build method will return what our users will see.
+  Widget build(
+      BuildContext context, double shrinkOffset, bool overlapsContent) {
+    return Container(
+      color: Colors.indigo,
+      child: const FractionallySizedBox(
+        heightFactor: 1,
+        child: Center(
+          child: Text(
+            'Title!',
+            style: TextStyle(
+              color: Colors.white,
+            ),
+          ),
+        ),
+      ),
+      // it takes the largest space as much as possilbe at the parent's widget.
+    );
+  }
+
+  @override
+  double get maxExtent => 150;
+  // like 'max Height'
+
+  @override
+  double get minExtent => 80;
+  // like 'min Hieght
+
+  @override
+  bool shouldRebuild(covariant SliverPersistentHeaderDelegate oldDelegate) {
+    // we will learn later when the return is true at DarkMode.
+    return false;
   }
 }
