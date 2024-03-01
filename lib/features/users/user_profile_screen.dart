@@ -91,30 +91,181 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                       ),
                     ),
                     Gaps.v14,
-                    FractionallySizedBox(
-                      widthFactor: 0.33,
-                      child: Container(
-                        padding: const EdgeInsets.symmetric(
-                          vertical: Sizes.size10,
-                        ),
-                        decoration: BoxDecoration(
-                          color: Theme.of(context).colorScheme.onPrimary,
-                          borderRadius: const BorderRadius.all(
-                            Radius.circular(
-                              Sizes.size4,
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: Sizes.size60,
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          Expanded(
+                            flex: 3,
+                            child: Container(
+                              padding: const EdgeInsets.symmetric(
+                                vertical: Sizes.size10,
+                              ),
+                              decoration: BoxDecoration(
+                                color: Theme.of(context).colorScheme.onPrimary,
+                                borderRadius: const BorderRadius.all(
+                                  Radius.circular(
+                                    Sizes.size4,
+                                  ),
+                                ),
+                              ),
+                              child: const Text(
+                                'Follow',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                                textAlign: TextAlign.center,
+                              ),
                             ),
                           ),
-                        ),
-                        child: const Text(
-                          'Follow',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.w600,
+                          Gaps.h5,
+                          Expanded(
+                            flex: 1,
+                            child: Container(
+                              padding: const EdgeInsets.symmetric(
+                                vertical: Sizes.size10,
+                              ),
+                              decoration: BoxDecoration(
+                                border: Border.all(
+                                  width: 1,
+                                  color: Colors.grey.shade500,
+                                ),
+                                color: Colors.transparent,
+                                borderRadius: const BorderRadius.all(
+                                  Radius.circular(
+                                    Sizes.size4,
+                                  ),
+                                ),
+                              ),
+                              child: const Center(
+                                child: FaIcon(
+                                  FontAwesomeIcons.youtube,
+                                  color: Colors.black,
+                                  size: Sizes.size18,
+                                ),
+                              ),
+                            ),
                           ),
-                          textAlign: TextAlign.center,
-                        ),
+                          Gaps.h5,
+                          Expanded(
+                            flex: 1,
+                            child: Container(
+                              padding: const EdgeInsets.symmetric(
+                                vertical: Sizes.size10,
+                              ),
+                              decoration: BoxDecoration(
+                                border: Border.all(
+                                  width: 1,
+                                  color: Colors.grey.shade500,
+                                ),
+                                color: Colors.transparent,
+                                borderRadius: const BorderRadius.all(
+                                  Radius.circular(
+                                    Sizes.size4,
+                                  ),
+                                ),
+                              ),
+                              child: const Center(
+                                child: FaIcon(
+                                  FontAwesomeIcons.arrowDown,
+                                  color: Colors.black,
+                                  size: Sizes.size18,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
-                    ),
+                    )
+
+                    // SizedBox(
+                    //   width: MediaQuery.of(context).size.width,
+                    //   child: Row(
+                    //     children: [
+                    //       FractionallySizedBox(
+                    //         widthFactor: 0.4,
+                    //         child: Container(
+                    //           padding: const EdgeInsets.symmetric(
+                    //             vertical: Sizes.size10,
+                    //           ),
+                    //           decoration: BoxDecoration(
+                    //             color: Theme.of(context).colorScheme.onPrimary,
+                    //             borderRadius: const BorderRadius.all(
+                    //               Radius.circular(
+                    //                 Sizes.size4,
+                    //               ),
+                    //             ),
+                    //           ),
+                    //           child: const Text(
+                    //             'Follow',
+                    //             style: TextStyle(
+                    //               color: Colors.white,
+                    //               fontWeight: FontWeight.w600,
+                    //             ),
+                    //             textAlign: TextAlign.center,
+                    //           ),
+                    //         ),
+                    //       ),
+                    //       Gaps.h8,
+                    //       FractionallySizedBox(
+                    //         widthFactor: 0.3,
+                    //         child: Container(
+                    //           padding: const EdgeInsets.symmetric(
+                    //             vertical: Sizes.size10,
+                    //           ),
+                    //           decoration: BoxDecoration(
+                    //             color: Colors.white,
+                    //             border: Border.all(
+                    //               color: Colors.grey.shade900,
+                    //               width: 1,
+                    //             ),
+                    //             borderRadius: const BorderRadius.all(
+                    //               Radius.circular(
+                    //                 Sizes.size4,
+                    //               ),
+                    //             ),
+                    //           ),
+                    //           child: const FaIcon(
+                    //             FontAwesomeIcons.youtube,
+                    //             color: Colors.black,
+                    //             size: Sizes.size14,
+                    //           ),
+                    //         ),
+                    //       ),
+                    //       Gaps.h8,
+                    //       FractionallySizedBox(
+                    //         widthFactor: 0.3,
+                    //         child: Container(
+                    //           padding: const EdgeInsets.symmetric(
+                    //             vertical: Sizes.size10,
+                    //           ),
+                    //           decoration: BoxDecoration(
+                    //             color: Colors.white,
+                    //             border: Border.all(
+                    //               color: Colors.grey.shade900,
+                    //               width: 1,
+                    //             ),
+                    //             borderRadius: const BorderRadius.all(
+                    //               Radius.circular(
+                    //                 Sizes.size4,
+                    //               ),
+                    //             ),
+                    //           ),
+                    //           child: const FaIcon(
+                    //             FontAwesomeIcons.youtube,
+                    //             color: Colors.black,
+                    //             size: Sizes.size14,
+                    //           ),
+                    //         ),
+                    //       ),
+                    //     ],
+                    //   ),
+                    // ),
+                    ,
                     Gaps.v14,
                     const Padding(
                       padding: EdgeInsets.symmetric(horizontal: Sizes.size20),
@@ -153,8 +304,6 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
           body: TabBarView(
             children: [
               GridView.builder(
-                  keyboardDismissBehavior:
-                      ScrollViewKeyboardDismissBehavior.onDrag,
                   padding: EdgeInsets.zero,
                   itemCount: 18,
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
@@ -163,7 +312,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                     mainAxisSpacing: 0,
                     childAspectRatio: 9 / 13.8,
                   ),
-                  itemBuilder: (context, index) => Column(
+                  itemBuilder: (context, index) => Stack(
                         children: [
                           AspectRatio(
                             aspectRatio: 9 / 13.5,
@@ -173,6 +322,27 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                                 placeholder: "assets/images/placeholder.jpg",
                                 image:
                                     "https://steelfitusa.com/cdn/shop/articles/The-Anatomy-of-the-Biceps.jpg?v=1660142064&width=1500"),
+                          ),
+                          const Positioned(
+                            bottom: Sizes.size5,
+                            left: Sizes.size4,
+                            child: Row(
+                              children: [
+                                FaIcon(
+                                  FontAwesomeIcons.play,
+                                  size: Sizes.size12,
+                                  color: Colors.white,
+                                ),
+                                Gaps.h5,
+                                Text(
+                                  '4.1M',
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: Sizes.size12,
+                                      fontWeight: FontWeight.w600),
+                                ),
+                              ],
+                            ),
                           ),
                         ],
                       )
