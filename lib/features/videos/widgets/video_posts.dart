@@ -79,6 +79,12 @@ class _VideoPostState extends State<VideoPost>
   }
 
   void _onVisibilityChanged(VisibilityInfo info) {
+    if (!mounted) return;
+    // all stateful widget has this mounted property.
+    // this means whether your widget is mounted or not.
+    // if it is not mounted, so not beign shown to the users,
+    // meaning it is kileed by widget tree, then return nothing - the below
+    // codes will not run.
     if (info.visibleFraction == 1 &&
         !_isPaused &&
         !_videoPlayerController.value.isPlaying) {
