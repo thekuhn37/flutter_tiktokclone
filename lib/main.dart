@@ -1,9 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:tiktokclone/constants/sizes.dart';
-import 'package:tiktokclone/features/inbox/activity_screen.dart';
-import 'package:tiktokclone/features/main_navigation/main_navigation_screen.dart';
+import 'package:tiktokclone/features/authentication/sign_up_screen.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await SystemChrome.setPreferredOrientations(
+    [
+      DeviceOrientation.portraitUp,
+    ],
+  );
+  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark);
   runApp(const TikTokApp());
 }
 
@@ -13,6 +20,7 @@ class TikTokApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'TikTok Clone',
       theme: ThemeData(
         // 여기서 전체적인 컨트롤 센터 역할을 할 수 있다.
@@ -42,8 +50,7 @@ class TikTokApp extends StatelessWidget {
         splashColor: Colors.transparent,
         highlightColor: Colors.transparent,
       ),
-      home: const MainNavigationScreen(),
-      // SignUpScreen()
+      home: const SignUpScreen(),
     );
   }
 }
