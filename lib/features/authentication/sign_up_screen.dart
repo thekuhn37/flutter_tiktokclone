@@ -86,50 +86,75 @@ class SignUpScreen extends StatelessWidget {
                       ),
                       Gaps.v12,
                     ],
-                    if (orientation == Orientation.landscape)
-                      Column(
-                        children: [
-                          Row(
-                            children: [
-                              Expanded(
-                                child: AuthButton(
-                                  icon: const FaIcon(FontAwesomeIcons.user),
-                                  text: 'Use email or password',
-                                  onTapFunction: _onEmailTap,
-                                ),
-                              ),
-                              Gaps.h12,
-                              Expanded(
-                                child: AuthButton(
-                                  icon: const FaIcon(FontAwesomeIcons.facebook),
-                                  text: 'Continue with Facebook',
-                                  onTapFunction: (context) {},
-                                ),
-                              ),
-                            ],
-                          ),
-                          Gaps.v16,
-                          Row(
-                            children: [
-                              Expanded(
-                                child: AuthButton(
-                                  icon: const FaIcon(FontAwesomeIcons.apple),
-                                  text: 'Continue with Apple',
-                                  onTapFunction: (context) {},
-                                ),
-                              ),
-                              Gaps.h12,
-                              Expanded(
-                                child: AuthButton(
-                                  icon: const FaIcon(FontAwesomeIcons.google),
-                                  text: 'Continue with Google',
-                                  onTapFunction: (context) {},
-                                ),
-                              ),
-                            ],
-                          )
-                        ],
-                      )
+                    if (orientation == Orientation.landscape) ...[
+                      AuthButton(
+                        icon: const FaIcon(FontAwesomeIcons.user),
+                        text: 'Use email or password',
+                        onTapFunction: _onEmailTap,
+                      ),
+                      Gaps.v12,
+                      AuthButton(
+                        icon: const FaIcon(FontAwesomeIcons.facebook),
+                        text: 'Continue with Facebook',
+                        onTapFunction: (context) {},
+                      ),
+                      Gaps.v12,
+                      AuthButton(
+                        icon: const FaIcon(FontAwesomeIcons.apple),
+                        text: 'Continue with Apple',
+                        onTapFunction: (context) {},
+                      ),
+                      Gaps.v12,
+                      AuthButton(
+                        icon: const FaIcon(FontAwesomeIcons.google),
+                        text: 'Continue with Google',
+                        onTapFunction: (context) {},
+                      ),
+                      Gaps.v12,
+                    ],
+                    // Column(
+                    //   children: [
+                    //     Row(
+                    //       children: [
+                    //         Expanded(
+                    //           child: AuthButton(
+                    //             icon: const FaIcon(FontAwesomeIcons.user),
+                    //             text: 'Use email or password',
+                    //             onTapFunction: _onEmailTap,
+                    //           ),
+                    //         ),
+                    //         Gaps.h12,
+                    //         Expanded(
+                    //           child: AuthButton(
+                    //             icon: const FaIcon(FontAwesomeIcons.facebook),
+                    //             text: 'Continue with Facebook',
+                    //             onTapFunction: (context) {},
+                    //           ),
+                    //         ),
+                    //       ],
+                    //     ),
+                    //     Gaps.v16,
+                    //     Row(
+                    //       children: [
+                    //         Expanded(
+                    //           child: AuthButton(
+                    //             icon: const FaIcon(FontAwesomeIcons.apple),
+                    //             text: 'Continue with Apple',
+                    //             onTapFunction: (context) {},
+                    //           ),
+                    //         ),
+                    //         Gaps.h12,
+                    //         Expanded(
+                    //           child: AuthButton(
+                    //             icon: const FaIcon(FontAwesomeIcons.google),
+                    //             text: 'Continue with Google',
+                    //             onTapFunction: (context) {},
+                    //           ),
+                    //         ),
+                    //       ],
+                    //     )
+                    //   ],
+                    // )
                   ],
                 ),
               ),

@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tiktokclone/constants/gaps.dart';
@@ -23,15 +24,14 @@ class VideoPost extends StatefulWidget {
 
 class _VideoPostState extends State<VideoPost>
     with SingleTickerProviderStateMixin {
-  final VideoPlayerController _videoPlayerController =
-      VideoPlayerController.asset(
-    "assets/videos/IMG_1689.MOV",
-  );
+  late final VideoPlayerController _videoPlayerController;
 
   late final AnimationController _animationController;
 
   bool _isPaused = false;
   final Duration _animationDuration = const Duration(milliseconds: 200);
+
+  bool _isMuted = true;
 
   bool _areTagsHidden = true;
   final List _hashTags = [
@@ -53,8 +53,14 @@ class _VideoPostState extends State<VideoPost>
   }
 
   void _initVideoPlayer() async {
+    _videoPlayerController = VideoPlayerController.asset(
+      "assets/videos/IMG_1689.MOV",
+    );
     await _videoPlayerController.initialize();
     await _videoPlayerController.setLooping(true);
+    if (kIsWeb) {
+      await _videoPlayerController.setVolume(0);
+    }
     _videoPlayerController.addListener(_onVideoChange);
     setState(() {});
   }
@@ -119,6 +125,22 @@ class _VideoPostState extends State<VideoPost>
       builder: (context) => const VideoComments(),
     );
     _onTogglePause();
+  }
+
+  void _onSoundTap(BuildContext context) async {
+    if (_isMuted) {
+      _videoPlayerController.setVolume(1);
+      setState(
+        () {
+          _isMuted = false;
+        },
+      );
+    } else {
+      _videoPlayerController.setVolume(0);
+      setState(() {
+        _isMuted = true;
+      });
+    }
   }
 
   @override
@@ -242,6 +264,19 @@ class _VideoPostState extends State<VideoPost>
                   ],
                 ),
               ],
+            ),
+          ),
+          Positioned(
+            top: 60,
+            right: 10,
+            child: GestureDetector(
+              onTap: () => _onSoundTap(context),
+              child: VideoButton(
+                icon: _isMuted
+                    ? FontAwesomeIcons.volumeXmark
+                    : FontAwesomeIcons.volumeHigh,
+                text: _isMuted ? "Muted" : "Sound On",
+              ),
             ),
           ),
           Positioned(
