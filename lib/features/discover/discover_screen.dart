@@ -163,7 +163,7 @@ class _DiscoverScreenState extends State<DiscoverScreen>
             controller: _tabController,
             onTap: _onTapbarTapped,
             splashFactory: NoSplash.splashFactory,
-            tabAlignment: TabAlignment.start,
+            tabAlignment: TabAlignment.center,
             padding: const EdgeInsets.symmetric(
               horizontal: Sizes.size16,
             ),

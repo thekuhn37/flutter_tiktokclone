@@ -7,7 +7,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await SystemChrome.setPreferredOrientations(
     [
-      DeviceOrientation.portraitUp,
+      // DeviceOrientation.portraitUp,
     ],
   );
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark);
