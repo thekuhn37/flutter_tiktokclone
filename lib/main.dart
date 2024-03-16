@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:tiktokclone/constants/sizes.dart';
+import 'package:tiktokclone/features/authentication/sign_up_screen.dart';
 import 'package:tiktokclone/features/main_navigation/main_navigation_screen.dart';
 
 void main() async {
@@ -22,10 +23,13 @@ class TikTokApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'TikTok Clone',
+      themeMode: ThemeMode.system,
       theme: ThemeData(
-        // 여기서 전체적인 컨트롤 센터 역할을 할 수 있다.
+        // brightness: Brightness.light,
         scaffoldBackgroundColor: Colors.white,
-        // 이렇게 하면 모든 scaffold 배경색 한번에 변경된다.
+        bottomAppBarTheme: BottomAppBarTheme(
+          color: Colors.grey.shade50,
+        ),
         textSelectionTheme: const TextSelectionThemeData(
           cursorColor: Color(
             0xFFE9435A,
@@ -50,7 +54,23 @@ class TikTokApp extends StatelessWidget {
         splashColor: Colors.transparent,
         highlightColor: Colors.transparent,
       ),
-      home: const MainNavigationScreen(),
+      darkTheme: ThemeData(
+        scaffoldBackgroundColor: Colors.black,
+        bottomAppBarTheme: const BottomAppBarTheme(
+          color: Colors.black45,
+        ),
+        textSelectionTheme: const TextSelectionThemeData(
+          cursorColor: Color(
+            0xFFE9435A,
+          ),
+        ),
+        colorScheme: ColorScheme.fromSeed(
+          brightness: Brightness.dark,
+          seedColor: Colors.white,
+          onPrimary: const Color(0xFFE9435A),
+        ),
+      ),
+      home: const SignUpScreen(),
     );
   }
 }
