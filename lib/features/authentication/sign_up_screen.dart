@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tiktokclone/features/authentication/username_screen.dart';
 import 'package:tiktokclone/features/authentication/login_screen.dart';
@@ -43,12 +42,15 @@ class SignUpScreen extends StatelessWidget {
                 child: Column(
                   children: [
                     Gaps.v80,
-                    const Text(
+                    Text(
                       'Sign up for TikTok',
-                      style: TextStyle(
-                        fontSize: Sizes.size24,
-                        fontWeight: FontWeight.w700,
-                      ),
+                      style: Theme.of(context)
+                          .textTheme
+                          .headlineSmall!
+                          .copyWith(
+                              color: isDarkMode(context)
+                                  ? Colors.amber
+                                  : Colors.teal),
                     ),
                     Gaps.v20,
                     const Opacity(
