@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tiktokclone/constants/sizes.dart';
+import 'package:tiktokclone/features/utils.dart';
 
 class PostVideoButton extends StatelessWidget {
   final bool onTapDown;
@@ -14,25 +15,26 @@ class PostVideoButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = isDarkMode(context);
     Color containerColor;
     if (onTapDown) {
       containerColor =
           Colors.grey.shade500; // Set color to grey when onTapDown is true
     } else {
-      containerColor = inverted
-          ? Colors.black
+      containerColor = inverted || isDark
+          ? Colors.white
           : Colors
-              .white; // Set color to black when inverted is true, otherwise white
+              .black; // Set color to black when inverted is true, otherwise white
     }
 
     Color iconColor;
     if (onTapDown) {
       iconColor = Colors.white; // Set color to grey when onTapDown is true
     } else {
-      iconColor = inverted
-          ? Colors.white
+      iconColor = inverted || isDark
+          ? Colors.black
           : Colors
-              .black; // Set color to black when inverted is true, otherwise white
+              .white; // Set color to black when inverted is true, otherwise white
     }
 
     return Stack(

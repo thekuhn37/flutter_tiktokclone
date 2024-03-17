@@ -4,7 +4,6 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tiktokclone/constants/sizes.dart';
 import 'package:tiktokclone/features/inbox/activity_screen.dart';
 import 'package:tiktokclone/features/inbox/chats_screen.dart';
-import 'package:tiktokclone/features/onboarding/widgets/tutorialpage.dart';
 
 class InboxScreen extends StatelessWidget {
   const InboxScreen({super.key});

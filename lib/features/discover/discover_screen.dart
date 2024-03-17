@@ -6,6 +6,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tiktokclone/constants/breaktpoints.dart';
 import 'package:tiktokclone/constants/gaps.dart';
 import 'package:tiktokclone/constants/sizes.dart';
+import 'package:tiktokclone/features/utils.dart';
 
 final tabs = [
   "Top",
@@ -115,19 +116,20 @@ class _DiscoverScreenState extends State<DiscoverScreen>
                 color: Colors.black,
               ),
               decoration: InputDecoration(
+                hintText: 'Search exercise',
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(Sizes.size12),
                   borderSide: BorderSide.none,
                 ),
                 filled: true,
-                fillColor: Colors.grey.shade200,
+                // fillColor: Colors.blue,
                 contentPadding: const EdgeInsets.symmetric(
                   horizontal: Sizes.size12,
                   vertical: Sizes.size4,
                 ),
                 prefixIcon: const Padding(
                   padding: EdgeInsets.only(
-                    top: Sizes.size10,
+                    top: Sizes.size12,
                     left: Sizes.size10,
                   ),
                   child: FaIcon(
@@ -168,11 +170,6 @@ class _DiscoverScreenState extends State<DiscoverScreen>
               horizontal: Sizes.size16,
             ),
             isScrollable: true,
-            unselectedLabelColor: Colors.grey,
-            labelStyle: const TextStyle(
-                fontWeight: FontWeight.w600, fontSize: Sizes.size16),
-            labelColor: Colors.black,
-            indicatorColor: Colors.black,
             tabs: [
               for (var tab in tabs)
                 Tab(
@@ -213,11 +210,12 @@ class _DiscoverScreenState extends State<DiscoverScreen>
                           ),
                         ),
                         Gaps.v14,
-                        Text(
-                          "${constraints.maxWidth} This is a very long caption. In Tiktok, people can leave their comments here..",
+                        const Text(
+                          // ${constraints.maxWidth}
+                          "This is a very long caption. In Tiktok, people can leave their comments here..",
                           maxLines: 2,
                           overflow: TextOverflow.ellipsis,
-                          style: const TextStyle(
+                          style: TextStyle(
                             fontSize: Sizes.size16 + Sizes.size2,
                             fontWeight: FontWeight.bold,
                           ),
@@ -228,7 +226,9 @@ class _DiscoverScreenState extends State<DiscoverScreen>
                           DefaultTextStyle(
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
-                              color: Colors.grey.shade600,
+                              color: isDarkMode(context)
+                                  ? Colors.white
+                                  : Colors.grey.shade600,
                             ),
                             child: Row(
                               children: [
