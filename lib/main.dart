@@ -6,6 +6,7 @@ import 'package:tiktokclone/constants/sizes.dart';
 import 'package:tiktokclone/features/authentication/sign_up_screen.dart';
 import 'package:tiktokclone/features/main_navigation/main_navigation_screen.dart';
 import 'package:tiktokclone/features/settings/settings_screen.dart';
+import "package:flutter_gen/gen_l10n/intl_generated.dart";
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -26,16 +27,8 @@ class TikTokApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'TikTok Clone',
-      localizationsDelegates: const [
-        GlobalMaterialLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-      ],
-      supportedLocales: const [
-        Locale("en"),
-        Locale("ko"),
-        Locale("es"),
-      ],
+      localizationsDelegates: AppLocalizations.localizationsDelegates,
+      supportedLocales: AppLocalizations.supportedLocales,
       themeMode: ThemeMode.system,
       theme: ThemeData(
         useMaterial3: true,
@@ -172,7 +165,7 @@ class TikTokApp extends StatelessWidget {
           onPrimary: const Color(0xFFE9435A),
         ),
       ),
-      home: const SettingsScreen(),
+      home: const SignUpScreen(),
     );
   }
 }
