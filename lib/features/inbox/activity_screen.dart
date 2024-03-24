@@ -4,6 +4,7 @@ import 'package:flutter/widgets.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tiktokclone/constants/gaps.dart';
 import 'package:tiktokclone/constants/sizes.dart';
+import 'package:tiktokclone/features/utils.dart';
 
 class ActivityScreen extends StatefulWidget {
   const ActivityScreen({super.key});
@@ -103,6 +104,7 @@ class _ActivityScreenState extends State<ActivityScreen>
 
   @override
   Widget build(BuildContext context) {
+    final isDark = isDarkMode(context);
     // print(_notifications);
     return Scaffold(
       appBar: AppBar(
@@ -182,33 +184,34 @@ class _ActivityScreenState extends State<ActivityScreen>
                       width: Sizes.size48,
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
-                        color: Colors.white,
+                        color: isDark ? Colors.grey.shade900 : Colors.white,
                         border: Border.all(
                           color: Colors.grey.shade400,
                           width: Sizes.size1,
                         ),
                       ),
-                      child: const Center(
+                      child: Center(
                         child: FaIcon(
                           FontAwesomeIcons.bell,
-                          color: Colors.black,
+                          color: isDark ? Colors.grey.shade300 : Colors.black,
                         ),
                       ),
                     ),
                     title: RichText(
                       text: TextSpan(
                         text: "Account updates:",
-                        style: const TextStyle(
+                        style: TextStyle(
                           fontWeight: FontWeight.w600,
-                          color: Colors.black,
+                          color: isDark ? Colors.grey.shade300 : Colors.black,
                           fontSize: Sizes.size16,
                         ),
                         children: [
-                          const TextSpan(
+                          TextSpan(
                             text: " Upload longer videos",
                             style: TextStyle(
                               fontWeight: FontWeight.normal,
-                              color: Colors.black,
+                              color:
+                                  isDark ? Colors.grey.shade300 : Colors.black,
                             ),
                           ),
                           TextSpan(
@@ -239,9 +242,9 @@ class _ActivityScreenState extends State<ActivityScreen>
           SlideTransition(
             position: _panelAnimation,
             child: Container(
-              decoration: const BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.only(
+              decoration: BoxDecoration(
+                color: Theme.of(context).appBarTheme.backgroundColor,
+                borderRadius: const BorderRadius.only(
                   bottomLeft: Radius.circular(Sizes.size5),
                   bottomRight: Radius.circular(Sizes.size5),
                 ),
@@ -251,9 +254,9 @@ class _ActivityScreenState extends State<ActivityScreen>
                 children: [
                   for (var tab in _tabs)
                     ListTile(
-                      leading: FaIcon(
+                      leading: Icon(
                         tab["icon"],
-                        color: Colors.black,
+                        // color: Colors.black,
                         size: Sizes.size20,
                       ),
                       title: Text(

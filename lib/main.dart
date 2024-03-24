@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:tiktokclone/constants/sizes.dart';
 import 'package:tiktokclone/features/authentication/sign_up_screen.dart';
 import 'package:tiktokclone/features/main_navigation/main_navigation_screen.dart';
+import 'package:tiktokclone/features/settings/settings_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -24,8 +26,19 @@ class TikTokApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'TikTok Clone',
+      localizationsDelegates: const [
+        GlobalMaterialLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+      ],
+      supportedLocales: const [
+        Locale("en"),
+        Locale("ko"),
+        Locale("es"),
+      ],
       themeMode: ThemeMode.system,
       theme: ThemeData(
+        useMaterial3: true,
         brightness: Brightness.light,
         textTheme: Typography.blackCupertino
         // TextTheme(
@@ -71,8 +84,9 @@ class TikTokApp extends StatelessWidget {
           onPrimary: const Color(0xFFE9435A),
         ),
         appBarTheme: const AppBarTheme(
+          surfaceTintColor: Colors.white,
           backgroundColor: Colors.white,
-          foregroundColor: Colors.black,
+          // foregroundColor: Colors.black,
           elevation: 0,
           titleTextStyle: TextStyle(
             color: Colors.black,
@@ -81,6 +95,7 @@ class TikTokApp extends StatelessWidget {
             // 이렇게 더해줄 수도 있다.
           ),
         ),
+        listTileTheme: const ListTileThemeData(iconColor: Colors.black),
         tabBarTheme: const TabBarTheme(
           unselectedLabelColor: Colors.grey,
           labelStyle:
@@ -88,11 +103,11 @@ class TikTokApp extends StatelessWidget {
           labelColor: Colors.black,
           indicatorColor: Colors.black,
         ),
-        useMaterial3: true,
         splashColor: Colors.transparent,
         highlightColor: Colors.transparent,
       ),
       darkTheme: ThemeData(
+        useMaterial3: true,
         textTheme: Typography.whiteCupertino
         // TextTheme(
         //   displayLarge: GoogleFonts.openSans(
@@ -124,10 +139,16 @@ class TikTokApp extends StatelessWidget {
         // )
         ,
         scaffoldBackgroundColor: Colors.black,
-        appBarTheme: const AppBarTheme(
-          backgroundColor: Colors.black,
-          // surfaceTintColor: Colors.transparent,
+        appBarTheme: AppBarTheme(
+          surfaceTintColor: Colors.grey.shade900,
+          backgroundColor: Colors.grey.shade900,
           // color: Colors.black45,
+          titleTextStyle: const TextStyle(
+            color: Colors.white,
+            fontWeight: FontWeight.w800,
+            fontSize: Sizes.size16 + Sizes.size2,
+            // 이렇게 더해줄 수도 있다.
+          ),
         ),
         tabBarTheme: const TabBarTheme(
           unselectedLabelColor: Colors.grey,
@@ -138,6 +159,7 @@ class TikTokApp extends StatelessWidget {
         ),
         bottomAppBarTheme: const BottomAppBarTheme(
           color: Colors.black45,
+          surfaceTintColor: Colors.black45,
         ),
         textSelectionTheme: const TextSelectionThemeData(
           cursorColor: Color(
@@ -150,7 +172,7 @@ class TikTokApp extends StatelessWidget {
           onPrimary: const Color(0xFFE9435A),
         ),
       ),
-      home: const MainNavigationScreen(),
+      home: const SettingsScreen(),
     );
   }
 }

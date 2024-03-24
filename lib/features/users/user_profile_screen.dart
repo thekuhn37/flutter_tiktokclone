@@ -51,6 +51,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                 SliverToBoxAdapter(
                   child: Column(
                     children: [
+                      Gaps.v20,
                       if (width > Breakpoints.md) ...[
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,

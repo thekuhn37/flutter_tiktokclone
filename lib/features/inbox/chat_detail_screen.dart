@@ -4,6 +4,7 @@ import 'package:flutter/widgets.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tiktokclone/constants/gaps.dart';
 import 'package:tiktokclone/constants/sizes.dart';
+import 'package:tiktokclone/features/utils.dart';
 
 class ChatDetailScreen extends StatefulWidget {
   const ChatDetailScreen({super.key});
@@ -69,6 +70,7 @@ class _ChatDetailScreenState extends State<ChatDetailScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = isDarkMode(context);
     return GestureDetector(
       onTap: _stopWriting,
       child: Scaffold(
@@ -188,7 +190,7 @@ class _ChatDetailScreenState extends State<ChatDetailScreen> {
                   left: Sizes.size16,
                 ),
                 elevation: 0,
-                color: Colors.grey.shade100,
+                color: isDark ? Colors.black : Colors.grey.shade100,
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
@@ -217,7 +219,7 @@ class _ChatDetailScreenState extends State<ChatDetailScreen> {
                             borderSide: BorderSide.none,
                           ),
                           filled: true,
-                          fillColor: Colors.white,
+                          // fillColor: Colors.white,
                           suffixIcon: _isFieldtapped
                               ? const Padding(
                                   padding: EdgeInsets.only(
@@ -242,13 +244,15 @@ class _ChatDetailScreenState extends State<ChatDetailScreen> {
                         decoration: BoxDecoration(
                           color: _isWriting
                               ? Theme.of(context).colorScheme.onPrimary
-                              : Colors.grey.shade400,
+                              : isDark
+                                  ? Colors.grey.shade800
+                                  : Colors.grey.shade400,
                           shape: BoxShape.circle,
                           // borderRadius: BorderRadius.circular(Sizes.size20),
                         ),
-                        child: const FaIcon(
+                        child: FaIcon(
                           FontAwesomeIcons.paperPlane,
-                          color: Colors.white,
+                          color: isDark ? Colors.grey.shade400 : Colors.white,
                           size: Sizes.size20,
                         ),
                       ),
