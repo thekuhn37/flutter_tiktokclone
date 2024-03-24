@@ -1,11 +1,16 @@
 {
-  "signUpTitle": "Sign up for {nameOfTheApp}",
+  "signUpTitle": "Sign up for {nameOfTheApp} {when}",
   "@signUpTitle": {
     "description": "The title people see when they open the app for the first time.",
     "placeholders": {
       "nameOfTheApp": {
         "type": "String",
         "example": "TikTok"
+      },
+      "when": {
+        "type": "DateTime",
+        "format": "yQQQ 제 LLLL : Hm",
+        "isCustomDateFormat": "true"
       }
     }
   },
@@ -19,11 +24,41 @@
       }
     }
   },
-  "signUpSubTitle": "Create a profile, follow other accounts, make your own videos, and more.",
+  "signUpSubTitle": "Create a profile, follow other accounts, make your own {videoCount, plural, =0{no videos} =1{video} other{videos}}, and more.",
   "emailPasswordButton": "Use email & password",
   "fbSignUpButton": "Continue with Facebook",
   "appleSignUpButton": "Continue with Apple",
   "googleSignUpButton": "Continue with Google",
   "alreadyHaveAnAccount": "Already have an account?",
-  "logIn": "Log in"
+  "logIn": "Log in {gender, select, male{sir} female{madam} other{human}}",
+  "likeCount": "{value}",
+  "@likeCount": {
+    "description": "The number of the count people clikced the like button.",
+    "placeholders": {
+      "value": {
+        "type": "int",
+        "format": "compact"
+      }
+    }
+  },
+  "commentCount": "{value}",
+  "@commentCount": {
+    "description": "The number of the count people clikced the like button.",
+    "placeholders": {
+      "value": {
+        "type": "int",
+        "format": "compact"
+      }
+    }
+  },
+  "replyCount": "{value} {value2, plural, =1{comment} other{comments}}",
+  "@replyCount": {
+    "description": "The number of the replies people left for the video.",
+    "placeholders": {
+      "value": {
+        "type": "int",
+        "format": "compact"
+      }
+    }
+  }
 }

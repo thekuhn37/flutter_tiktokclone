@@ -50,13 +50,17 @@ class S {
     return Localizations.of<S>(context, S);
   }
 
-  /// `Sign up for {nameOfTheApp}`
-  String signUpTitle(String nameOfTheApp) {
+  /// `Sign up for {nameOfTheApp} {when}`
+  String signUpTitle(String nameOfTheApp, DateTime when) {
+    final DateFormat whenDateFormat =
+        DateFormat('yQQQ 제 LLLL : Hm', Intl.getCurrentLocale());
+    final String whenString = whenDateFormat.format(when);
+
     return Intl.message(
-      'Sign up for $nameOfTheApp',
+      'Sign up for $nameOfTheApp $whenString',
       name: 'signUpTitle',
       desc: 'The title people see when they open the app for the first time.',
-      args: [nameOfTheApp],
+      args: [nameOfTheApp, whenString],
     );
   }
 
@@ -70,13 +74,13 @@ class S {
     );
   }
 
-  /// `Create a profile, follow other accounts, make your own videos, and more.`
-  String get signUpSubTitle {
+  /// `Create a profile, follow other accounts, make your own {videoCount, plural, =0{no videos} =1{video} other{videos}}, and more.`
+  String signUpSubTitle(num videoCount) {
     return Intl.message(
-      'Create a profile, follow other accounts, make your own videos, and more.',
+      'Create a profile, follow other accounts, make your own ${Intl.plural(videoCount, zero: 'no videos', one: 'video', other: 'videos')}, and more.',
       name: 'signUpSubTitle',
       desc: '',
-      args: [],
+      args: [videoCount],
     );
   }
 
@@ -130,13 +134,58 @@ class S {
     );
   }
 
-  /// `Log in`
-  String get logIn {
+  /// `Log in {gender, select, male{sir} female{madam} other{human}}`
+  String logIn(String gender) {
     return Intl.message(
-      'Log in',
+      'Log in ${Intl.gender(gender, male: 'sir', female: 'madam', other: 'human')}',
       name: 'logIn',
       desc: '',
-      args: [],
+      args: [gender],
+    );
+  }
+
+  /// `{value}`
+  String likeCount(int value) {
+    final NumberFormat valueNumberFormat = NumberFormat.compact(
+      locale: Intl.getCurrentLocale(),
+    );
+    final String valueString = valueNumberFormat.format(value);
+
+    return Intl.message(
+      '$valueString',
+      name: 'likeCount',
+      desc: 'The number of the count people clikced the like button.',
+      args: [valueString],
+    );
+  }
+
+  /// `{value}`
+  String commentCount(int value) {
+    final NumberFormat valueNumberFormat = NumberFormat.compact(
+      locale: Intl.getCurrentLocale(),
+    );
+    final String valueString = valueNumberFormat.format(value);
+
+    return Intl.message(
+      '$valueString',
+      name: 'commentCount',
+      desc: 'The number of the count people clikced the like button.',
+      args: [valueString],
+    );
+  }
+
+  /// `{value} {value2, plural, =1{comment} other{comments}}`
+  String replyCount(int value, num value2) {
+    final NumberFormat valueNumberFormat = NumberFormat.compact(
+      locale: Intl.getCurrentLocale(),
+    );
+    final String valueString = valueNumberFormat.format(value);
+
+    return Intl.message(
+      '$valueString ${Intl.plural(value2, one: 'comment', other: 'comments')}',
+      name: 'replyCount',
+      desc: 'The number of the replies people left for the video.',
+      args: [valueString, value2],
     );
   }
 }
