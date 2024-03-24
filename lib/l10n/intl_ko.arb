@@ -1,0 +1,11 @@
+{
+  "signUpTitle": "{nameOfTheApp}에 가입하세요",
+  "logInTitle": "{nameOfTheApp} 계정에 로그인하세요",
+  "signUpSubTitle": "프로필을 작성하고 다른 유저를 팔로우 하고, 당신의 비디오를 만들어보세요.",
+  "emailPasswordButton": "이메일 & 비밀번호로 가입하기",
+  "fbSignUpButton": "Facebook 계정으로 가입하기",
+  "appleSignUpButton": "Apple 계정으로 가입하기",
+  "googleSignUpButton": "Google 계정으로 가입하기",
+  "alreadyHaveAnAccount": "이미 계정이 있나요?",
+  "logIn": "로그인"
+}
