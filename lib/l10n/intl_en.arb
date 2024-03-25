@@ -9,8 +9,7 @@
       },
       "when": {
         "type": "DateTime",
-        "format": "yQQQ 제 LLLL : Hm",
-        "isCustomDateFormat": "true"
+        "format": "MMMd"
       }
     }
   },
