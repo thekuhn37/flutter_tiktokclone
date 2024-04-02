@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:go_router/go_router.dart';
 import 'package:tiktokclone/features/authentication/username_screen.dart';
 import 'package:tiktokclone/features/authentication/login_screen.dart';
 import 'package:tiktokclone/constants/gaps.dart';
@@ -15,14 +16,7 @@ class SignUpScreen extends StatelessWidget {
 //  private 한 method의 이름 맨 앞에는 '_'를 붙여주자.
 // state lifecycle 관련된 method 앞에는 '_' 안붙여준다. ex.Build
   void _onLoginTap(BuildContext context) async {
-    final result = Navigator.of(context).pushNamed(LoginScreen.routeName);
-    print(result);
-    // await Navigator.of(context).push(
-    //   MaterialPageRoute(
-    //     builder: (context) => const LoginScreen(),
-    //   ),
-    // );
-    // print('User came back');
+    context.push(LoginScreen.routeName);
   }
 
   void _onEmailTap(BuildContext context) {
@@ -50,7 +44,7 @@ class SignUpScreen extends StatelessWidget {
     //         );
     //       }),
     // );
-    Navigator.of(context).pushNamed(UsernameScreen.routeName);
+    context.push(UsernameScreen.routeName);
   }
 
   @override

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:go_router/go_router.dart';
 import 'package:tiktokclone/constants/gaps.dart';
 import 'package:tiktokclone/constants/sizes.dart';
 import 'package:tiktokclone/features/authentication/login_form_screen.dart';
@@ -14,7 +15,7 @@ class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
 
   void _onSignUpTap(BuildContext context) {
-    Navigator.of(context).pop();
+    context.pop();
     // 나중엔 더 나은 코드를 사용할 것.
   }
 
