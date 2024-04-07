@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:tiktokclone/constants/gaps.dart';
 import 'package:tiktokclone/constants/sizes.dart';
 import 'package:tiktokclone/features/authentication/email_screen.dart';
@@ -43,11 +44,17 @@ class _UsernameScreenState extends State<UsernameScreen> {
 
   void _onNextTap() {
     if (_username.isEmpty) return;
+    context.push(
+      EmailScreen.routeName,
+      extra: EmailScreenArgs(username: _username),
+    );
+    /*
     Navigator.pushNamed(
       context,
       EmailScreen.routeName,
       arguments: EmailScreenArgs(username: _username),
     );
+    */
   }
 /*
 다른 화면에서는 페이지 이동하는 메서드를 만들 때, 항상 context를 받게끔 했다. 

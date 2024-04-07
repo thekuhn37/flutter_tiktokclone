@@ -6,15 +6,16 @@ import 'package:tiktokclone/features/authentication/widgets/form_button.dart';
 
 class EmailScreenArgs {
   final String username;
-
   EmailScreenArgs({required this.username});
 }
 
 class EmailScreen extends StatefulWidget {
   static String routeName = "/email";
+  final String username;
 
   const EmailScreen({
     super.key,
+    required this.username,
   });
 
   @override
@@ -72,7 +73,7 @@ class _EmailScreenState extends State<EmailScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final args = ModalRoute.of(context)!.settings.arguments as EmailScreenArgs;
+    // final args = ModalRoute.of(context)!.settings.arguments as EmailScreenArgs;
     return GestureDetector(
       onTap: _onScaffoldTap,
       // onTap: _onScaffoldTap()로 하면 안되는 이유: void method 이므로.
@@ -89,7 +90,7 @@ class _EmailScreenState extends State<EmailScreen> {
               children: [
                 Gaps.v28,
                 Text(
-                  'What is your email, ${args.username}?',
+                  'What is your email, ${widget.username}?',
                   style: const TextStyle(
                     fontSize: Sizes.size20 + Sizes.size2,
                     fontWeight: FontWeight.w600,
